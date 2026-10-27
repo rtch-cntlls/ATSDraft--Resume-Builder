@@ -1,7 +1,15 @@
 export default function SummarySection({ resumeData, setResumeData }) {
   const summaryText = resumeData.summary || '';
+  const sectionTitle = resumeData.summaryTitle || 'Professional Summary';
   const characterCount = summaryText.length;
   const recommendedMax = 500;
+
+  const handleTitleChange = (value) => {
+    setResumeData({
+      ...resumeData,
+      summaryTitle: value
+    });
+  };
 
   const handleTextChange = (value) => {
     setResumeData({
@@ -22,6 +30,20 @@ export default function SummarySection({ resumeData, setResumeData }) {
 
         <div className="d-flex flex-column gap-3">
           <div>
+            <label className="form-label text-dark fw-bold small mb-1">
+              Section Heading Title
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-sm rounded-3 text-dark fw-medium p-2"
+              placeholder="e.g. Professional Summary or About Me"
+              value={sectionTitle}
+              onChange={(e) => handleTitleChange(e.target.value)}
+              style={{ fontSize: '0.875rem' }}
+            />
+          </div>
+
+          <div>
             <div className="d-flex justify-content-between align-items-center mb-1">
               <label className="form-label text-dark fw-bold small mb-0">
                 Profile Summary <span className="text-danger">*</span>
@@ -37,7 +59,7 @@ export default function SummarySection({ resumeData, setResumeData }) {
             <textarea
               className="form-control form-control-sm rounded-3 text-dark fw-medium lh-base p-3"
               rows={6}
-              placeholder="e.g. Dedicated Information Technology student and full-stack web developer with hands-on experience building modern web applications using Next.js, Laravel, and Supabase..."
+              placeholder="e.g. Dedicated and results-oriented professional with extensive experience in administrative support, customer relations, and operational management. Proven track record......"
               value={summaryText}
               onChange={(e) => handleTextChange(e.target.value)}
               style={{ fontSize: '0.875rem' }}

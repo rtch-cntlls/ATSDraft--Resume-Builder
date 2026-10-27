@@ -86,7 +86,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
             <input
               type="text"
               className="form-control form-control-sm rounded-3 text-dark fw-medium"
-              placeholder="e.g. Alex Morgan"
+              placeholder="e.g. John Doe"
               value={resumeData.header.fullName || ''}
               onChange={(e) => handleTextChange('fullName', e.target.value)}
             />
@@ -101,7 +101,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                 <input
                   type="email"
                   className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                  placeholder="e.g. alex.morgan@email.com"
+                  placeholder="e.g. john.doe@email.com"
                   value={resumeData.header.email || ''}
                   onChange={(e) => handleTextChange('email', e.target.value)}
                 />
@@ -113,7 +113,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                 <input
                   type="text"
                   className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                  placeholder="e.g. +1 (555) 019-2834"
+                  placeholder="e.g. +63 912 345 6789"
                   value={resumeData.header.phone || ''}
                   onChange={(e) => handleTextChange('phone', e.target.value)}
                 />
@@ -126,7 +126,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
             <input
               type="text"
               className="form-control form-control-sm rounded-3 text-dark fw-medium"
-              placeholder="e.g. San Francisco, CA or Cebu City, Philippines"
+              placeholder="e.g. City, State / Country"
               value={resumeData.header.location || ''}
               onChange={(e) => handleTextChange('location', e.target.value)}
             />
@@ -144,7 +144,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                   <input
                     type="text"
                     className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                    placeholder="e.g. linkedin.com/in/alexmorgan"
+                    placeholder="e.g. linkedin.com/in/johndoe"
                     value={resumeData.header.linkedin || ''}
                     onChange={(e) => handleTextChange('linkedin', e.target.value)}
                   />
@@ -157,7 +157,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                   <input
                     type="text"
                     className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                    placeholder="e.g. github.com/alexmorgan or alexmorgan.dev"
+                    placeholder="e.g. github.com/johndoe or johndoe.com"
                     value={resumeData.header.github || ''}
                     onChange={(e) => handleTextChange('github', e.target.value)}
                   />
@@ -210,7 +210,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
           </div>
 
           <div className="pt-2">
-            <span className="text-uppercase text-muted fw-bold d-block mb-1" style={{ fontSize: '0.9rem' }}>
+            <span className="text-uppercase fw-bold d-block mb-1" style={{ fontSize: '0.9rem' }}>
               Contact Details Sequence
             </span>
             <p className="text-muted small mb-3" style={{ fontSize: '0.8rem' }}>
@@ -225,36 +225,38 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                   onDragStart={() => handleDragStart(index)}
                   onDragOver={handleDragOver}
                   onDrop={() => handleDrop(index)}
-                  className={`d-flex align-items-center justify-content-between p-2 bg-light border rounded-3 transition-all ${
+                  className={`p-3 rounded-3 border-0 transition-all d-flex align-items-center justify-content-between bg-light border-secondary-subtle ${
                     draggedIndex === index ? 'opacity-50 border-primary bg-primary-subtle' : ''
                   }`}
                   style={{ cursor: 'grab' }}
                 >
                   <div className="d-flex align-items-center gap-2">
                     <span className="small fw-semibold text-dark">
-                      {index + 1}. {labelMap[key]}
+                      {labelMap[key]}
                     </span>
                   </div>
 
-                  <div className="d-flex align-items-center gap-1">
-                    <button
-                      type="button"
-                      className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
-                      disabled={index === 0}
-                      onClick={() => moveItem(index, 'up')}
-                      title="Move up"
-                    >
-                      <i className="bi bi-chevron-up"></i>
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
-                      disabled={index === headerOrder.length - 1}
-                      onClick={() => moveItem(index, 'down')}
-                      title="Move down"
-                    >
-                      <i className="bi bi-chevron-down"></i>
-                    </button>
+                  <div className="d-flex align-items-center gap-5">
+                    <div className="btn-group btn-group-sm shadow-none" role="group">
+                      <button
+                        type="button"
+                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
+                        disabled={index === 0}
+                        onClick={() => moveItem(index, 'up')}
+                        title="Move up"
+                      >
+                        <i className="bi bi-chevron-up"></i>
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
+                        disabled={index === headerOrder.length - 1}
+                        onClick={() => moveItem(index, 'down')}
+                        title="Move down"
+                      >
+                        <i className="bi bi-chevron-down"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

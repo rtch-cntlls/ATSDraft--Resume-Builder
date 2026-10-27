@@ -1,4 +1,13 @@
 export default function CertificatesSection({ resumeData, setResumeData }) {
+  const sectionTitle = resumeData.certificatesTitle || 'Certificates';
+
+  const handleTitleChange = (value) => {
+    setResumeData({
+      ...resumeData,
+      certificatesTitle: value
+    });
+  };
+
   const handleChange = (index, field, value) => {
     const updated = [...resumeData.certificates];
     updated[index][field] = value;
@@ -34,6 +43,20 @@ export default function CertificatesSection({ resumeData, setResumeData }) {
         <p className="text-secondary mb-4" style={{ fontSize: '0.8rem' }}>
           List your professional certifications, licenses, training, or relevant credentials.
         </p>
+
+        <div className="mb-3">
+          <label className="form-label text-dark fw-bold small mb-1">
+            Section Heading Title
+          </label>
+          <input
+            type="text"
+            className="form-control form-control-sm rounded-3 text-dark fw-medium"
+            placeholder="e.g. Certificates, Certifications & Licenses, Professional Credentials"
+            value={sectionTitle}
+            onChange={(e) => handleTitleChange(e.target.value)}
+            style={{ fontSize: '0.875rem' }}
+          />
+        </div>
 
         {resumeData.certificates.map((cert, index) => (
           <div key={cert.id} className="border rounded-3 p-3 mb-3 position-relative">

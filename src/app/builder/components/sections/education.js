@@ -1,4 +1,13 @@
 export default function EducationSection({ resumeData, setResumeData }) {
+  const sectionTitle = resumeData.educationTitle || 'Education';
+
+  const handleTitleChange = (value) => {
+    setResumeData({
+      ...resumeData,
+      educationTitle: value
+    });
+  };
+
   const handleChange = (index, field, value) => {
     const updated = [...resumeData.education];
     updated[index][field] = value;
@@ -33,8 +42,22 @@ export default function EducationSection({ resumeData, setResumeData }) {
           </button>
         </div>
         <p className="text-secondary mb-4" style={{ fontSize: '0.8rem' }}>
-         List your degrees, diplomas, or academic qualifications in reverse chronological order (most recent first).
+          List your degrees, diplomas, or academic qualifications in reverse chronological order (most recent first).
         </p>
+
+        <div className="mb-3">
+          <label className="form-label text-dark fw-bold small mb-1">
+            Section Heading Title
+          </label>
+          <input
+            type="text"
+            className="form-control form-control-sm rounded-3 text-dark fw-medium"
+            placeholder="e.g. Education, Academic Background, Education & Qualifications"
+            value={sectionTitle}
+            onChange={(e) => handleTitleChange(e.target.value)}
+            style={{ fontSize: '0.875rem' }}
+          />
+        </div>
 
         {resumeData.education.map((edu, index) => (
           <div key={edu.id} className="border rounded-3 p-3 mb-3 bg-white position-relative">

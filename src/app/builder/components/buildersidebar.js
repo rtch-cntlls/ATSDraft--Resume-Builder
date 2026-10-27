@@ -8,7 +8,7 @@ export default function BuilderSidebar({ activeSection, setActiveSection, isColl
     { id: 'workExperience', label: 'Work Experience', icon: 'bi-briefcase' },
     { id: 'education', label: 'Education', icon: 'bi-mortarboard' },
     { id: 'certificate', label: 'Certifications', icon: 'bi-award' },
-    { id: 'settings', label: 'Design & Style', icon: 'bi-palette' }
+    { id: 'settings', label: 'Design & Layout', icon: 'bi-palette' }
   ];
 
   return (

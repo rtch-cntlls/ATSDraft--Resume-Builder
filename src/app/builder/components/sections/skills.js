@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 export default function SkillsSection({ resumeData, setResumeData }) {
+  const sectionTitle = resumeData.skillsTitle || 'Skills';
+
   const skillsConfig = resumeData.skillsConfig || {
     mode: 'categorized',
     categories: [],
@@ -11,6 +13,13 @@ export default function SkillsSection({ resumeData, setResumeData }) {
     setResumeData({
       ...resumeData,
       skillsConfig: newConfig
+    });
+  };
+
+  const handleTitleChange = (value) => {
+    setResumeData({
+      ...resumeData,
+      skillsTitle: value
     });
   };
 
@@ -65,6 +74,20 @@ export default function SkillsSection({ resumeData, setResumeData }) {
         </p>
 
         <div className="d-flex flex-column gap-3">
+          <div>
+            <label className="form-label text-dark fw-bold small mb-1">
+              Section Heading Title
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-sm rounded-3 text-dark fw-medium"
+              placeholder="e.g. Skills, Core Competencies, Technical Skills"
+              value={sectionTitle}
+              onChange={(e) => handleTitleChange(e.target.value)}
+              style={{ fontSize: '0.875rem' }}
+            />
+          </div>
+
           {skillsConfig.categories.map((cat, index) => (
             <div key={cat.id || index} className="p-3 bg-white border rounded-3 position-relative">
               {skillsConfig.categories.length > 0 && (
@@ -119,7 +142,7 @@ export default function SkillsSection({ resumeData, setResumeData }) {
           <div className="btn-group w-100" role="group">
             <button
               type="button"
-              className={`btn btn-sm py-1  ${skillsConfig.mode === 'categorized' ? 'btn-dark' : 'btn-outline-secondary'}`}
+              className={`btn btn-sm py-1 ${skillsConfig.mode === 'categorized' ? 'btn-dark' : 'btn-outline-secondary'}`}
               onClick={() => handleModeChange('categorized')}
               style={{ fontSize: '0.85rem' }}
             >
@@ -127,9 +150,9 @@ export default function SkillsSection({ resumeData, setResumeData }) {
             </button>
             <button
               type="button"
-              className={`btn btn-sm py-1  ${skillsConfig.mode === 'bullets' ? 'btn-dark' : 'btn-outline-secondary'}`}
+              className={`btn btn-sm py-1 ${skillsConfig.mode === 'bullets' ? 'btn-dark' : 'btn-outline-secondary'}`}
               onClick={() => handleModeChange('bullets')}
-               style={{ fontSize: '0.85rem' }}
+              style={{ fontSize: '0.85rem' }}
             >
               Bullet Point List
             </button>

@@ -7,6 +7,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
       education: true,
       certificates: true
     },
+    sectionOrder: ['summary', 'skills', 'workExperience', 'education', 'certificates'],
     titleColor: '#0f172a',
     fontFamily: 'Arial, sans-serif',
     fontSize: 'normal'
@@ -36,6 +37,23 @@ export default function SettingsSection({ resumeData, setResumeData }) {
     });
   };
 
+  const moveSection = (index, direction) => {
+    const currentOrder = settings.sectionOrder || ['summary', 'skills', 'workExperience', 'education', 'certificates'];
+    const newOrder = [...currentOrder];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+
+    if (targetIndex < 0 || targetIndex >= newOrder.length) return;
+
+    const temp = newOrder[index];
+    newOrder[index] = newOrder[targetIndex];
+    newOrder[targetIndex] = temp;
+
+    updateSettings({
+      ...settings,
+      sectionOrder: newOrder
+    });
+  };
+
   const palette = [
     { name: 'Dark Slate', hex: '#0f172a' },
     { name: 'Navy Blue', hex: '#1e3a8a' },
@@ -52,13 +70,15 @@ export default function SettingsSection({ resumeData, setResumeData }) {
     { label: 'Courier New — Fixed Width (Tech Style)', value: '"Courier New", Courier, monospace' }
   ];
 
-  const sectionsConfig = [
-    { key: 'summary', label: 'Professional Summary', icon: 'bi-card-text', desc: 'Display or hide your introductory profile statement' },
-    { key: 'skills', label: 'Skills & Competencies', icon: 'bi-tools', desc: 'Display or hide your key skills and technical abilities' },
-    { key: 'workExperience', label: 'Work History', icon: 'bi-briefcase', desc: 'Display or hide your job experience and achievements' },
-    { key: 'education', label: 'Education & Academics', icon: 'bi-mortarboard', desc: 'Display or hide your degrees, schools, and coursework' },
-    { key: 'certificates', label: 'Certifications & Licenses', icon: 'bi-award', desc: 'Display or hide your professional credentials' }
-  ];
+  const sectionMetadata = {
+    summary: { label: 'Professional Summary', icon: 'bi-card-text', desc: 'Display or hide your introductory profile statement' },
+    skills: { label: 'Skills & Competencies', icon: 'bi-tools', desc: 'Display or hide your key skills and technical abilities' },
+    workExperience: { label: 'Work History', icon: 'bi-briefcase', desc: 'Display or hide your job experience and achievements' },
+    education: { label: 'Education & Academics', icon: 'bi-mortarboard', desc: 'Display or hide your degrees, schools, and coursework' },
+    certificates: { label: 'Certifications & Licenses', icon: 'bi-award', desc: 'Display or hide your professional credentials' }
+  };
+
+  const currentOrder = settings.sectionOrder || ['summary', 'skills', 'workExperience', 'education', 'certificates'];
 
   return (
     <div className="section-workspace fade-in px-1">
@@ -66,26 +86,30 @@ export default function SettingsSection({ resumeData, setResumeData }) {
         <h5 className="fw-bold text-dark mb-0">Resume Design & Layout</h5>
       </div>
       <p className="text-secondary mb-4" style={{ fontSize: '0.8rem' }}>
-        Customize your resume layout by toggling sections on or off, adjusting text appearance, and selecting custom header colors.
+        Customize your resume layout by reordering sections, toggling visibility, adjusting text appearance, and selecting custom header colors.
       </p>
       <div className="d-flex flex-column gap-4">
+        
         <div className="bg-white">
           <div className="d-flex align-items-center justify-content-between mb-3">
             <div>
               <span className="d-block fw-bold text-dark text-uppercase" style={{ fontSize: '0.9rem' }}>
-                Section Visibility
+                Section Order & Visibility
               </span>
-              <span className="text-secondary" style={{ fontSize: '0.75rem' }}>Control which sections appear on your final printed or exported resume</span>
+              <span className="text-secondary" style={{ fontSize: '0.75rem' }}>Arrange sequence and control which sections appear on your resume</span>
             </div>
-            <i className="bi bi-eye text-muted fs-5"></i>
+            <i className="bi bi-list-nested text-muted fs-5"></i>
           </div>
 
           <div className="d-flex flex-column gap-2">
-            {sectionsConfig.map((sec) => {
-              const isVisible = settings.visibleSections[sec.key] !== false;
+            {currentOrder.map((secKey, index) => {
+              const sec = sectionMetadata[secKey];
+              if (!sec) return null;
+              const isVisible = settings.visibleSections?.[secKey] !== false;
+
               return (
                 <div
-                  key={sec.key}
+                  key={secKey}
                   className={`p-2 rounded-3 border-0 transition-all d-flex align-items-center justify-content-between ${
                     isVisible ? 'bg-light border-secondary-subtle' : 'bg-white border-dashed opacity-75'
                   }`}
@@ -100,16 +124,39 @@ export default function SettingsSection({ resumeData, setResumeData }) {
                     </div>
                   </div>
 
-                  <div className="form-check form-switch m-0 ps-3">
-                    <input
-                      className="form-check-input cursor-pointer shadow-none"
-                      type="checkbox"
-                      role="switch"
-                      id={`toggle-${sec.key}`}
-                      checked={isVisible}
-                      onChange={() => handleVisibilityToggle(sec.key)}
-                      style={{ width: '36px', height: '18px' }}
-                    />
+                  <div className="d-flex align-items-center gap-5">
+                    <div className="btn-group btn-group-sm shadow-none" role="group">
+                      <button
+                        type="button"
+                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
+                        disabled={index === 0}
+                        onClick={() => moveSection(index, 'up')}
+                        title="Move Up"
+                      >
+                        <i className="bi bi-chevron-up" style={{ fontSize: '0.75rem' }}></i>
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
+                        disabled={index === currentOrder.length - 1}
+                        onClick={() => moveSection(index, 'down')}
+                        title="Move Down"
+                      >
+                        <i className="bi bi-chevron-down" style={{ fontSize: '0.75rem' }}></i>
+                      </button>
+                    </div>
+
+                    <div className="form-check form-switch m-0 ps-2 border-start">
+                      <input
+                        className="form-check-input cursor-pointer shadow-none"
+                        type="checkbox"
+                        role="switch"
+                        id={`toggle-${secKey}`}
+                        checked={isVisible}
+                        onChange={() => handleVisibilityToggle(secKey)}
+                        style={{ width: '36px', height: '18px' }}
+                      />
+                    </div>
                   </div>
                 </div>
               );
@@ -129,7 +176,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
           </div>
 
           <div className="mb-3">
-            <label className="form-label text-dark fw-semibold small mb-1">Font Family</label>
+            <label className="form-label text-dark fw-semibold small mb-1">Font Style</label>
             <select
               className="form-select form-select-sm rounded-3 text-dark fw-medium shadow-none py-2"
               value={settings.fontFamily}

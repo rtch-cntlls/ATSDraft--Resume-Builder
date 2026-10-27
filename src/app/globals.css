@@ -52,3 +52,25 @@ body {
 .sample p span{
   font-size: clamp(0.89rem, 3vw, 1.1rem) !important;
 }
+.overflow-y-auto::-webkit-scrollbar,
+.custom-saas-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track,
+.custom-saas-scrollbar::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb,
+.custom-saas-scrollbar::-webkit-scrollbar-thumb {
+  background: #ced4da;
+  border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.custom-saas-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6c757d;
+}

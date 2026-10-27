@@ -1,0 +1,227 @@
+export default function SettingsSection({ resumeData, setResumeData }) {
+  const settings = resumeData.settings || {
+    visibleSections: {
+      summary: true,
+      skills: true,
+      workExperience: true,
+      education: true,
+      certificates: true
+    },
+    titleColor: '#0f172a',
+    fontFamily: 'Arial, sans-serif',
+    fontSize: 'normal'
+  };
+
+  const updateSettings = (newSettings) => {
+    setResumeData({
+      ...resumeData,
+      settings: newSettings
+    });
+  };
+
+  const handleVisibilityToggle = (sectionKey) => {
+    updateSettings({
+      ...settings,
+      visibleSections: {
+        ...settings.visibleSections,
+        [sectionKey]: !settings.visibleSections[sectionKey]
+      }
+    });
+  };
+
+  const handleStyleChange = (field, value) => {
+    updateSettings({
+      ...settings,
+      [field]: value
+    });
+  };
+
+  const palette = [
+    { name: 'Dark Slate', hex: '#0f172a' },
+    { name: 'Navy Blue', hex: '#1e3a8a' },
+    { name: 'Forest Green', hex: '#065f46' },
+    { name: 'Deep Bronze', hex: '#7c2d12' },
+    { name: 'Royal Purple', hex: '#4c1d95' },
+    { name: 'Solid Black', hex: '#000000' }
+  ];
+
+  const typography = [
+    { label: 'Arial — Clean & Easy to Read', value: 'Arial, Helvetica, sans-serif' },
+    { label: 'Times New Roman — Classic & Formal', value: '"Times New Roman", Times, serif' },
+    { label: 'Calibri — Modern Professional', value: 'Calibri, "Segoe UI", sans-serif' },
+    { label: 'Courier New — Fixed Width (Tech Style)', value: '"Courier New", Courier, monospace' }
+  ];
+
+  const sectionsConfig = [
+    { key: 'summary', label: 'Professional Summary', icon: 'bi-card-text', desc: 'Display or hide your introductory profile statement' },
+    { key: 'skills', label: 'Skills & Competencies', icon: 'bi-tools', desc: 'Display or hide your key skills and technical abilities' },
+    { key: 'workExperience', label: 'Work History', icon: 'bi-briefcase', desc: 'Display or hide your job experience and achievements' },
+    { key: 'education', label: 'Education & Academics', icon: 'bi-mortarboard', desc: 'Display or hide your degrees, schools, and coursework' },
+    { key: 'certificates', label: 'Certifications & Licenses', icon: 'bi-award', desc: 'Display or hide your professional credentials' }
+  ];
+
+  return (
+    <div className="section-workspace fade-in px-1">
+      <div className="d-flex align-items-center justify-content-between pb-2 mb-1 border-bottom">
+        <h5 className="fw-bold text-dark mb-0">Resume Design & Layout</h5>
+      </div>
+      <p className="text-secondary mb-4" style={{ fontSize: '0.8rem' }}>
+        Customize your resume layout by toggling sections on or off, adjusting text appearance, and selecting custom header colors.
+      </p>
+      <div className="d-flex flex-column gap-4">
+        <div className="bg-white">
+          <div className="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <span className="d-block fw-bold text-dark text-uppercase" style={{ fontSize: '0.9rem' }}>
+                Section Visibility
+              </span>
+              <span className="text-secondary" style={{ fontSize: '0.75rem' }}>Control which sections appear on your final printed or exported resume</span>
+            </div>
+            <i className="bi bi-eye text-muted fs-5"></i>
+          </div>
+
+          <div className="d-flex flex-column gap-2">
+            {sectionsConfig.map((sec) => {
+              const isVisible = settings.visibleSections[sec.key] !== false;
+              return (
+                <div
+                  key={sec.key}
+                  className={`p-2 rounded-3 border-0 transition-all d-flex align-items-center justify-content-between ${
+                    isVisible ? 'bg-light border-secondary-subtle' : 'bg-white border-dashed opacity-75'
+                  }`}
+                >
+                  <div className="d-flex align-items-center gap-2">
+                    <div className={`rounded-2 p-1 d-flex align-items-center justify-content-center ${isVisible ? 'bg-dark text-white' : 'bg-secondary-subtle text-muted'}`} style={{ width: '28px', height: '28px' }}>
+                      <i className={`bi ${sec.icon}`} style={{ fontSize: '0.85rem' }}></i>
+                    </div>
+                    <div>
+                      <span className="d-block text-dark fw-semibold" style={{ fontSize: '0.825rem', lineHeight: '1.2' }}>{sec.label}</span>
+                      <span className="text-muted" style={{ fontSize: '0.7rem' }}>{sec.desc}</span>
+                    </div>
+                  </div>
+
+                  <div className="form-check form-switch m-0 ps-3">
+                    <input
+                      className="form-check-input cursor-pointer shadow-none"
+                      type="checkbox"
+                      role="switch"
+                      id={`toggle-${sec.key}`}
+                      checked={isVisible}
+                      onChange={() => handleVisibilityToggle(sec.key)}
+                      style={{ width: '36px', height: '18px' }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="bg-white">
+          <div className="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <span className="d-block fw-bold text-dark text-uppercase" style={{ fontSize: '0.9rem' }}>
+                Typography & Sizing
+              </span>
+              <span className="text-secondary" style={{ fontSize: '0.75rem' }}>Adjust font style and overall text sizing for optimal readability</span>
+            </div>
+            <i className="bi bi-fonts text-muted fs-5"></i>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label text-dark fw-semibold small mb-1">Font Family</label>
+            <select
+              className="form-select form-select-sm rounded-3 text-dark fw-medium shadow-none py-2"
+              value={settings.fontFamily}
+              onChange={(e) => handleStyleChange('fontFamily', e.target.value)}
+              style={{ fontSize: '0.825rem' }}
+            >
+              {typography.map((font, idx) => (
+                <option key={idx} value={font.value}>{font.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="form-label text-dark fw-semibold small mb-1">Overall Text Size</label>
+            <div className="btn-group w-100" role="group">
+              {[
+                { key: 'small', label: 'Compact' },
+                { key: 'normal', label: 'Standard' },
+                { key: 'large', label: 'Large' }
+              ].map((scale) => {
+                const active = (settings.fontSize === scale.key) || (!settings.fontSize && scale.key === 'normal');
+                return (
+                  <button
+                    key={scale.key}
+                    type="button"
+                    className={`btn btn-sm fw-medium shadow-none py-1 ${active ? 'btn-dark text-white' : 'btn-outline-secondary text-secondary bg-light border-secondary-subtle'}`}
+                    onClick={() => handleStyleChange('fontSize', scale.key)}
+                    style={{ fontSize: '0.8rem' }}
+                  >
+                    {scale.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white mb-3">
+          <div className="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <span className="d-block fw-bold text-dark text-uppercase" style={{ fontSize: '0.9rem' }}>
+                Header Accent Color
+              </span>
+              <span className="text-secondary" style={{ fontSize: '0.75rem' }}>Choose an accent color for section headings and divider highlights</span>
+            </div>
+            <i className="bi bi-palette text-muted fs-5"></i>
+          </div>
+
+          <div className="d-flex flex-column gap-3">
+            <div className="d-flex align-items-center gap-2">
+              <div className="position-relative rounded-circle overflow-hidden border shadow-sm" style={{ width: '36px', height: '36px', flexShrink: 0 }}>
+                <input
+                  type="color"
+                  className="position-absolute border-0 p-0 cursor-pointer"
+                  style={{ width: '60px', height: '60px', top: '-12px', left: '-12px' }}
+                  value={settings.titleColor || '#0f172a'}
+                  onChange={(e) => handleStyleChange('titleColor', e.target.value)}
+                />
+              </div>
+              <div className="flex-grow-1">
+                <input
+                  type="text"
+                  className="form-control form-control-sm text-dark font-monospace fw-semibold shadow-none bg-light border-secondary-subtle"
+                  value={settings.titleColor || '#0f172a'}
+                  onChange={(e) => handleStyleChange('titleColor', e.target.value)}
+                  style={{ fontSize: '0.8rem', maxWidth: '140px' }}
+                />
+              </div>
+            </div>
+
+            <div className="row g-2">
+              {palette.map((item, i) => {
+                const isSelected = settings.titleColor?.toLowerCase() === item.hex.toLowerCase();
+                return (
+                  <div key={i} className="col-4">
+                    <button
+                      type="button"
+                      className={`w-100 btn btn-sm d-flex align-items-center gap-2 py-2 px-2 rounded-3 border transition-all text-start shadow-none ${
+                        isSelected ? 'bg-dark text-white border-dark' : 'bg-light border-secondary-subtle text-dark hover-bg-white'
+                      }`}
+                      onClick={() => handleStyleChange('titleColor', item.hex)}
+                    >
+                      <span className="rounded-circle border shadow-xs" style={{ width: '14px', height: '14px', backgroundColor: item.hex, flexShrink: 0 }}></span>
+                      <span className="text-truncate" style={{ fontSize: '0.7rem', fontWeight: isSelected ? '600' : '500' }}>{item.name}</span>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

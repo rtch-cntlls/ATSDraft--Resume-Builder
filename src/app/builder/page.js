@@ -6,7 +6,6 @@ import Logo from '../../../public/logo/primary.png';
 import BuilderSidebar from './components/buildersidebar';
 import BuilderFormArea from './components/builderformarea';
 import ResumePreview from './components/resumepreview';
-import Link from 'next/link';
 
 export default function BuilderPage() {
     const [activeSection, setActiveSection] = useState('header');
@@ -15,41 +14,49 @@ export default function BuilderPage() {
 
     const [resumeData, setResumeData] = useState({
         header: {
-            fullName: 'Alex Morgan',
-            email: 'alex.morgan@email.com',
-            phone: '+1 (555) 234-5678',
-            location: 'San Francisco, CA',
-            linkedin: 'linkedin.com/in/alexmorgan',
-            github: 'github.com/alexmorgan',
+            fullName: 'John Doe',
+            email: 'john.doe@email.com',
+            phone: '+63 912 345 6789',
+            location: 'Minila, Philippines',
+            linkedin: 'linkedin.com/in/johndoe',
+            github: 'github.com/johndoe',
             headerOrder: ['location', 'phone', 'email', 'linkedin', 'github']
         },
-        summary: 'Dedicated Full Stack Software Engineer with 4+ years of experience building scalable web applications using React, Next.js, Node.js, and PostgreSQL.',
-        skills: ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 'PostgreSQL', 'Bootstrap', 'Git'],
+        summary: 'Dedicated and results-oriented professional with extensive experience in administrative support, customer relations, and operational management. Proven track record of improving workflow efficiency and delivering exceptional service quality across dynamic team environments.',
+        skillsConfig: {
+            mode: 'categorized',
+            categories: [
+                { id: 1, title: 'Core Competencies', items: 'Time Management, Problem Solving, Client Relations' },
+                { id: 2, title: 'Work Ethic', items: 'Hardworking, Adaptability, Attention to Detail' },
+                { id: 3, title: 'Tools & Software', items: 'Microsoft Office Suite, Google Workspace, Basic POS Systems' }
+            ],
+            bulletSkills: ['Time Management', 'Hardworking', 'Problem Solving', 'Customer Service', 'Communication', 'Adaptability']
+        },
         workExperience: [
             {
                 id: 1,
-                jobTitle: 'Frontend Developer',
-                company: 'TechCorp Solutions',
-                location: 'San Francisco, CA',
+                jobTitle: 'Administrative Assistant',
+                company: 'Pacific Business Solutions',
+                location: 'Cebu City, Philippines',
                 startDate: 'Jan 2023',
                 endDate: 'Present',
-                description: 'Spearheaded the migration of the core dashboard to Next.js, improving page load speeds by 40% and boosting user retention.'
+                description: 'Managed daily office schedules, coordinated client communications, and streamlined record-keeping processes to improve operational workflow efficiency by 30%.'
             }
         ],
         education: [
             {
                 id: 1,
-                degree: 'B.S. in Information Technology',
-                institution: 'University of California',
-                location: 'Berkeley, CA',
+                degree: 'B.S. in Business Administration',
+                institution: 'University of San Carlos',
+                location: 'Cebu City, Philippines',
                 graduationDate: 'May 2022'
             }
         ],
         certificates: [
             {
                 id: 1,
-                name: 'AWS Certified Solutions Architect',
-                issuer: 'Amazon Web Services',
+                name: 'Professional Customer Service Certification',
+                issuer: 'National Training Institute',
                 date: '2024'
             }
         ]

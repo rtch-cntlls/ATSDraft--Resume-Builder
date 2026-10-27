@@ -4,6 +4,7 @@ import SkillsSection from './sections/skills';
 import WorkExperienceSection from './sections/experience';
 import EducationSection from './sections/education';
 import CertificatesSection from './sections/certificate';
+import SettingsSection from './sections/settings';
 
 export default function BuilderFormArea({ activeSection, resumeData, setResumeData }) {
   return (
@@ -25,6 +26,9 @@ export default function BuilderFormArea({ activeSection, resumeData, setResumeDa
       )}
       {activeSection === 'certificate' && (
         <CertificatesSection resumeData={resumeData} setResumeData={setResumeData} />
+      )}
+      {activeSection === 'settings' && (
+        <SettingsSection resumeData={resumeData} setResumeData={setResumeData} />
       )}
     </div>
   );

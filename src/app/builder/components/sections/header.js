@@ -21,7 +21,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
     phone: 'Phone Number',
     email: 'Email Address',
     linkedin: 'LinkedIn Profile',
-    github: 'GitHub / Portfolio'
+    github: 'GitHub / Portfolio Website'
   };
 
   const moveItem = (index, direction) => {
@@ -72,10 +72,10 @@ export default function HeaderSection({ resumeData, setResumeData }) {
       
       <div className="mb-4">
         <div className="d-flex align-items-center justify-content-between pb-2 mb-1 border-bottom">
-          <h5 className="fw-bold text-dark mb-0">Personal Details</h5>
+          <h5 className="fw-bold text-dark mb-0">Contact & Personal Details</h5>
         </div>
         <p className="text-secondary mb-4" style={{ fontSize: "0.8rem" }}>
-          Configure primary contact attributes and identification header displayed at the top of your resume.
+          Enter your full name and contact information to display prominently at the top header of your resume.
         </p>
 
         <div className="d-flex flex-column gap-3">
@@ -95,10 +95,13 @@ export default function HeaderSection({ resumeData, setResumeData }) {
           <div className="row g-3">
             <div className="col-md-6">
               <div>
-                <label className="form-label text-dark fw-bold small mb-1">Email <span className="text-danger">*</span></label>
+                <label className="form-label text-dark fw-bold small mb-1">
+                  Email Address <span className="text-danger">*</span>
+                </label>
                 <input
                   type="email"
                   className="form-control form-control-sm rounded-3 text-dark fw-medium"
+                  placeholder="e.g. alex.morgan@email.com"
                   value={resumeData.header.email || ''}
                   onChange={(e) => handleTextChange('email', e.target.value)}
                 />
@@ -110,6 +113,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                 <input
                   type="text"
                   className="form-control form-control-sm rounded-3 text-dark fw-medium"
+                  placeholder="e.g. +1 (555) 019-2834"
                   value={resumeData.header.phone || ''}
                   onChange={(e) => handleTextChange('phone', e.target.value)}
                 />
@@ -118,10 +122,11 @@ export default function HeaderSection({ resumeData, setResumeData }) {
           </div>
 
           <div>
-            <label className="form-label text-dark fw-bold small mb-1">Location / Address</label>
+            <label className="form-label text-dark fw-bold small mb-1">City, State / Country</label>
             <input
               type="text"
               className="form-control form-control-sm rounded-3 text-dark fw-medium"
+              placeholder="e.g. San Francisco, CA or Cebu City, Philippines"
               value={resumeData.header.location || ''}
               onChange={(e) => handleTextChange('location', e.target.value)}
             />
@@ -129,7 +134,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
 
           <div className="pt-3 border-top mt-2">
             <span className="text-uppercase text-secondary fw-bold d-block mb-2" style={{ fontSize: '0.8rem' }}>
-              Professional Links (Optional)
+              Professional Profiles & Links (Optional)
             </span>
 
             <div className="row g-3">
@@ -139,6 +144,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                   <input
                     type="text"
                     className="form-control form-control-sm rounded-3 text-dark fw-medium"
+                    placeholder="e.g. linkedin.com/in/alexmorgan"
                     value={resumeData.header.linkedin || ''}
                     onChange={(e) => handleTextChange('linkedin', e.target.value)}
                   />
@@ -147,10 +153,11 @@ export default function HeaderSection({ resumeData, setResumeData }) {
 
               <div className="col-md-6">
                 <div>
-                  <label className="form-label text-dark fw-bold small mb-1">GitHub / Website Portfolio</label>
+                  <label className="form-label text-dark fw-bold small mb-1">GitHub / Portfolio URL</label>
                   <input
                     type="text"
                     className="form-control form-control-sm rounded-3 text-dark fw-medium"
+                    placeholder="e.g. github.com/alexmorgan or alexmorgan.dev"
                     value={resumeData.header.github || ''}
                     onChange={(e) => handleTextChange('github', e.target.value)}
                   />
@@ -163,48 +170,51 @@ export default function HeaderSection({ resumeData, setResumeData }) {
 
       <div className="pt-4 border-top mb-4">
         <div className="d-flex align-items-center justify-content-between pb-2 mb-1 border-bottom">
-          <h5 className="fw-bold text-dark mb-0">Section Configuration</h5>
+          <h5 className="fw-bold text-dark mb-0">Header Alignment & Ordering</h5>
         </div>
         <p className="text-secondary mb-4" style={{ fontSize: "0.8rem" }}>
-          Customize the text alignment and drag-and-drop the sequence order of your header contact info.
+          Choose how your header information is aligned and reorder how your contact details appear.
         </p>
 
         <div className="d-flex flex-column gap-4">
           <div className="card bg-light border-0 shadow-sm p-3 rounded-3">
             <label className="form-label text-dark fw-bold small mb-2 d-block">
-              Header Text Alignment
+              Text Alignment
             </label>
             <div className="btn-group w-100" role="group">
               <button
                 type="button"
                 className={`btn btn-sm ${textAlign === 'text-start' ? 'btn-dark' : 'btn-outline-secondary'}`}
                 onClick={() => handleTextChange('textAlign', 'text-start')}
+                style={{ fontSize: '0.8rem' }}
               >
-                Left
+                Left Align
               </button>
               <button
                 type="button"
                 className={`btn btn-sm ${textAlign === 'text-center' ? 'btn-dark' : 'btn-outline-secondary'}`}
                 onClick={() => handleTextChange('textAlign', 'text-center')}
+                 style={{ fontSize: '0.8rem' }}
               >
-                Center
+                Center Align
               </button>
               <button
                 type="button"
                 className={`btn btn-sm ${textAlign === 'text-end' ? 'btn-dark' : 'btn-outline-secondary'}`}
                 onClick={() => handleTextChange('textAlign', 'text-end')}
+                 style={{ fontSize: '0.8rem' }}
               >
-                Right
+                Right Align
               </button>
             </div>
           </div>
 
           <div className="pt-2">
             <span className="text-uppercase text-muted fw-bold d-block mb-1" style={{ fontSize: '0.9rem' }}>
-              Header Sequence & Placement Order
+              Contact Details Sequence
             </span>
             <p className="text-muted small mb-3" style={{ fontSize: '0.8rem' }}>
-              Hold and drag any row to reorder, or use the arrow buttons.
+              Drag and drop items or use the up and down arrow buttons to change the order they appear in your header.
             </p>
 
             <div className="d-flex flex-column gap-2">
@@ -221,9 +231,6 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                   style={{ cursor: 'grab' }}
                 >
                   <div className="d-flex align-items-center gap-2">
-                    <span className="text-muted" style={{ cursor: 'grab' }}>
-                      <i className="bi bi-app-indicator"></i>
-                    </span>
                     <span className="small fw-semibold text-dark">
                       {index + 1}. {labelMap[key]}
                     </span>
@@ -235,6 +242,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                       className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
                       disabled={index === 0}
                       onClick={() => moveItem(index, 'up')}
+                      title="Move up"
                     >
                       <i className="bi bi-chevron-up"></i>
                     </button>
@@ -243,6 +251,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                       className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
                       disabled={index === headerOrder.length - 1}
                       onClick={() => moveItem(index, 'down')}
+                      title="Move down"
                     >
                       <i className="bi bi-chevron-down"></i>
                     </button>

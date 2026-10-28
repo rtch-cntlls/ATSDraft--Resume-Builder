@@ -2,6 +2,7 @@ import HeaderSection from './sections/header';
 import SummarySection from './sections/summary';
 import SkillsSection from './sections/skills';
 import WorkExperienceSection from './sections/experience';
+import ProjectSection from './sections/project';
 import EducationSection from './sections/education';
 import CertificatesSection from './sections/certificate';
 import SettingsSection from './sections/settings';
@@ -20,6 +21,9 @@ export default function BuilderFormArea({ activeSection, resumeData, setResumeDa
       )}
       {activeSection === 'workExperience' && (
         <WorkExperienceSection resumeData={resumeData} setResumeData={setResumeData} />
+      )}
+      {activeSection === 'projects' && (
+        <ProjectSection resumeData={resumeData} setResumeData={setResumeData} />
       )}
       {activeSection === 'education' && (
         <EducationSection resumeData={resumeData} setResumeData={setResumeData} />

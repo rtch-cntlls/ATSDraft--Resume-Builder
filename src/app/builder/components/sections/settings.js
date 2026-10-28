@@ -1,16 +1,20 @@
+'use client';
+
 export default function SettingsSection({ resumeData, setResumeData }) {
   const settings = resumeData.settings || {
     visibleSections: {
       summary: true,
       skills: true,
       workExperience: true,
+      projects: false,
       education: true,
       certificates: true
     },
-    sectionOrder: ['summary', 'skills', 'workExperience', 'education', 'certificates'],
+    sectionOrder: ['summary', 'skills', 'workExperience', 'projects', 'education', 'certificates'],
     titleColor: '#0f172a',
     fontFamily: 'Arial, sans-serif',
-    fontSize: 'normal'
+    fontSize: 'normal',
+    headingSizePx: '14px' // Default heading size
   };
 
   const updateSettings = (newSettings) => {
@@ -21,12 +25,16 @@ export default function SettingsSection({ resumeData, setResumeData }) {
   };
 
   const handleVisibilityToggle = (sectionKey) => {
+    const nextVisible = !settings.visibleSections?.[sectionKey];
     updateSettings({
       ...settings,
       visibleSections: {
         ...settings.visibleSections,
-        [sectionKey]: !settings.visibleSections[sectionKey]
-      }
+        [sectionKey]: nextVisible
+      },
+      projects: sectionKey === 'projects' && nextVisible && (!resumeData.projects || resumeData.projects.length === 0)
+        ? [{ id: Date.now(), title: '', technologies: '', date: '', description: '' }]
+        : resumeData.projects
     });
   };
 
@@ -38,7 +46,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
   };
 
   const moveSection = (index, direction) => {
-    const currentOrder = settings.sectionOrder || ['summary', 'skills', 'workExperience', 'education', 'certificates'];
+    const currentOrder = settings.sectionOrder || ['summary', 'skills', 'workExperience', 'projects', 'education', 'certificates'];
     const newOrder = [...currentOrder];
     const targetIndex = direction === 'up' ? index - 1 : index + 1;
 
@@ -74,11 +82,21 @@ export default function SettingsSection({ resumeData, setResumeData }) {
     summary: { label: 'Professional Summary', icon: 'bi-card-text', desc: 'Display or hide your introductory profile statement' },
     skills: { label: 'Skills & Competencies', icon: 'bi-tools', desc: 'Display or hide your key skills and technical abilities' },
     workExperience: { label: 'Work History', icon: 'bi-briefcase', desc: 'Display or hide your job experience and achievements' },
+    projects: { label: 'Projects & Key Initiatives', icon: 'bi-code-slash', desc: 'Display or hide your key projects, capstones, or research' },
     education: { label: 'Education & Academics', icon: 'bi-mortarboard', desc: 'Display or hide your degrees, schools, and coursework' },
     certificates: { label: 'Certifications & Licenses', icon: 'bi-award', desc: 'Display or hide your professional credentials' }
   };
 
-  const currentOrder = settings.sectionOrder || ['summary', 'skills', 'workExperience', 'education', 'certificates'];
+  const currentOrder = settings.sectionOrder || ['summary', 'skills', 'workExperience', 'projects', 'education', 'certificates'];
+
+  const visibleOrder = currentOrder.filter((secKey) => {
+    if (secKey === 'projects') {
+      return settings.visibleSections?.projects === true;
+    }
+    return true;
+  });
+
+  const headingSizeOptions = ['12px', '14px', '16px', '18px', '20px'];
 
   return (
     <div className="section-workspace fade-in px-1">
@@ -102,7 +120,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
           </div>
 
           <div className="d-flex flex-column gap-2">
-            {currentOrder.map((secKey, index) => {
+            {visibleOrder.map((secKey, index) => {
               const sec = sectionMetadata[secKey];
               if (!sec) return null;
               const isVisible = settings.visibleSections?.[secKey] !== false;
@@ -130,7 +148,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
                         type="button"
                         className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
                         disabled={index === 0}
-                        onClick={() => moveSection(index, 'up')}
+                        onClick={() => moveSection(currentOrder.indexOf(secKey), 'up')}
                         title="Move Up"
                       >
                         <i className="bi bi-chevron-up" style={{ fontSize: '0.75rem' }}></i>
@@ -138,8 +156,8 @@ export default function SettingsSection({ resumeData, setResumeData }) {
                       <button
                         type="button"
                         className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
-                        disabled={index === currentOrder.length - 1}
-                        onClick={() => moveSection(index, 'down')}
+                        disabled={index === visibleOrder.length - 1}
+                        onClick={() => moveSection(currentOrder.indexOf(secKey), 'down')}
                         title="Move Down"
                       >
                         <i className="bi bi-chevron-down" style={{ fontSize: '0.75rem' }}></i>
@@ -189,7 +207,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
             </select>
           </div>
 
-          <div>
+          <div className="mb-3">
             <label className="form-label text-dark fw-semibold small mb-1">Overall Text Size</label>
             <div className="btn-group w-100" role="group">
               {[
@@ -207,6 +225,26 @@ export default function SettingsSection({ resumeData, setResumeData }) {
                     style={{ fontSize: '0.8rem' }}
                   >
                     {scale.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <label className="form-label text-dark fw-semibold small mb-1">Section Heading Size (px)</label>
+            <div className="btn-group w-100" role="group">
+              {headingSizeOptions.map((pxValue) => {
+                const active = (settings.headingSizePx === pxValue) || (!settings.headingSizePx && pxValue === '14px');
+                return (
+                  <button
+                    key={pxValue}
+                    type="button"
+                    className={`btn btn-sm fw-medium shadow-none py-1 ${active ? 'btn-dark text-white' : 'btn-outline-secondary text-secondary bg-light border-secondary-subtle'}`}
+                    onClick={() => handleStyleChange('headingSizePx', pxValue)}
+                    style={{ fontSize: '0.8rem' }}
+                  >
+                    {pxValue}
                   </button>
                 );
               })}

@@ -52,6 +52,16 @@ body {
 .sample p span{
   font-size: clamp(0.89rem, 3vw, 1.1rem) !important;
 }
+
+.feature{
+  font-size: clamp(0.75rem, 3vw, 0.9rem) !important;
+}
+.badge-feature{
+  font-size: clamp(0.6rem, 3vw, 0.75rem) !important;
+}
+.badge-feature1{
+  font-size: clamp(0.75rem, 3vw, 0.98rem) !important;
+}
 .overflow-y-auto::-webkit-scrollbar,
 .custom-saas-scrollbar::-webkit-scrollbar {
   width: 6px;

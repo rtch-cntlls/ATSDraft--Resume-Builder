@@ -7,7 +7,7 @@ export default function ResumeFormula() {
   { key: 'result', label: 'Result', text: formulaExample.result },
 ];
   return (
-    <section className="py-5 bg-white">
+    <section id="how-it-works" className="py-5 bg-white">
       <div className="container py-4">
         <div className="text-center max-w-2xl mx-auto mb-5">
           <h1 className="fw-bold text-dark">

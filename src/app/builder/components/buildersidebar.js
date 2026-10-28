@@ -6,6 +6,7 @@ export default function BuilderSidebar({ activeSection, setActiveSection, isColl
     { id: 'summary', label: 'Summary', icon: 'bi-text-paragraph' },
     { id: 'skills', label: 'Skills & Expertise', icon: 'bi-stars' },
     { id: 'workExperience', label: 'Work Experience', icon: 'bi-briefcase' },
+    { id: 'projects', label: 'Projects & Initiatives', icon: 'bi-folder2-open' },
     { id: 'education', label: 'Education', icon: 'bi-mortarboard' },
     { id: 'certificate', label: 'Certifications', icon: 'bi-award' },
     { id: 'settings', label: 'Design & Layout', icon: 'bi-palette' }

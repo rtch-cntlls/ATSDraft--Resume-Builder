@@ -127,7 +127,7 @@ export default function SkillsSection({ resumeData, setResumeData }) {
         </div>
       </div>
 
-      <div className="pt-4 border-top mb-4">
+     <div className="pt-4 border-top mb-4">
         <div className="d-flex align-items-center justify-content-between pb-2 mb-1 border-bottom">
           <h5 className="fw-bold text-dark mb-0">Layout Format</h5>
         </div>
@@ -135,27 +135,31 @@ export default function SkillsSection({ resumeData, setResumeData }) {
           Select how your skills should be rendered on your resume.
         </p>
 
-        <div className="card bg-light border-0 shadow-sm p-3 rounded-3">
-          <label className="form-label text-dark fw-bold small mb-2 d-block">
-            Display Format
+        <div>
+          <label className="form-label text-dark fw-medium small mb-2 d-block">
+            Display Format Style
           </label>
-          <div className="btn-group w-100" role="group">
-            <button
-              type="button"
-              className={`btn btn-sm py-1 ${skillsConfig.mode === 'categorized' ? 'btn-dark' : 'btn-outline-secondary'}`}
-              onClick={() => handleModeChange('categorized')}
-              style={{ fontSize: '0.85rem' }}
-            >
-              Categorized Groups
-            </button>
-            <button
-              type="button"
-              className={`btn btn-sm py-1 ${skillsConfig.mode === 'bullets' ? 'btn-dark' : 'btn-outline-secondary'}`}
-              onClick={() => handleModeChange('bullets')}
-              style={{ fontSize: '0.85rem' }}
-            >
-              Bullet Point List
-            </button>
+          <div className="btn-group w-100 bg-light p-1 rounded-2 border" role="group">
+            {[
+              { key: 'categorized', label: 'Categorized Groups', icon: 'bi-grid-fill' },
+              { key: 'bullets', label: 'Bullet Point List', icon: 'bi-list-ul' }
+            ].map((mode) => {
+              const active = skillsConfig.mode === mode.key;
+              return (
+                <button
+                  key={mode.key}
+                  type="button"
+                  className={`btn btn-sm fw-medium rounded-2 transition-all shadow-none py-1 d-flex align-items-center justify-content-center gap-1.5 ${
+                    active ? 'bg-dark text-white shadow-xs' : 'text-secondary bg-transparent border-0 hover-dark'
+                  }`}
+                  onClick={() => handleModeChange(mode.key)}
+                  style={{ fontSize: '0.85rem' }}
+                >
+                  <i className={`bi me-1 fs-6 ${mode.icon}`}></i>
+                  <span>{mode.label}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -40,11 +40,20 @@ function BuilderContent() {
             const element = resumePreviewRef.current;
             
             const options = {
-                margin: 0,
+                margin: 0, // Handled completely by the preview element's padding
                 filename: `${resumeData.header.fullName.toLowerCase().replace(/\s+/g, '-')}-resume.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                html2canvas: { 
+                    scale: 2, 
+                    useCORS: true,
+                    letterRendering: true,
+                    windowWidth: 794 // 👈 Lock canvas width exactly to A4 reference width (794px at 96 DPI)
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait' 
+                }
             };
 
             html2pdf().from(element).set(options).save();

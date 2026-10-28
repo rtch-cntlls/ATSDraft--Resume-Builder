@@ -246,9 +246,10 @@ export default function ResumePreview({ resumeData }) {
 
   return (
     <div
-      className="card bg-white shadow-sm border-0 rounded-0 w-100 text-dark mx-auto overflow-hidden"
+      className="card bg-white shadow-sm border-0 rounded-0 text-dark mx-auto overflow-hidden"
       style={{
-        width: '100%',
+        width: '794px',
+        minWidth: '794px',
         maxWidth: '794px',
         minHeight: '923px',
         padding: '0.5in',

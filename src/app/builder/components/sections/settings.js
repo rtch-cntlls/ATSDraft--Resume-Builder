@@ -72,17 +72,17 @@ export default function SettingsSection({ resumeData, setResumeData }) {
   ];
 
   const typography = [
-    { label: 'Arial — Clean & Easy to Read', value: 'Arial, Helvetica, sans-serif' },
-    { label: 'Times New Roman — Classic & Formal', value: '"Times New Roman", Times, serif' },
-    { label: 'Calibri — Modern Professional', value: 'Calibri, "Segoe UI", sans-serif' },
-    { label: 'Courier New — Fixed Width (Tech Style)', value: '"Courier New", Courier, monospace' }
+    { label: 'Arial', value: 'Arial, Helvetica, sans-serif' },
+    { label: 'Times New Roman', value: '"Times New Roman", Times, serif' },
+    { label: 'Calibri', value: 'Calibri, "Segoe UI", sans-serif' },
+    { label: 'Courier New', value: '"Courier New", Courier, monospace' }
   ];
 
   const sectionMetadata = {
     summary: { label: 'Professional Summary', icon: 'bi-card-text', desc: 'Display or hide your introductory profile statement' },
-    skills: { label: 'Skills & Competencies', icon: 'bi-tools', desc: 'Display or hide your key skills and technical abilities' },
+    skills: { label: 'Skills & Competencies', icon: 'bi-stars', desc: 'Display or hide your key skills and technical abilities' },
     workExperience: { label: 'Work History', icon: 'bi-briefcase', desc: 'Display or hide your job experience and achievements' },
-    projects: { label: 'Projects & Key Initiatives', icon: 'bi-code-slash', desc: 'Display or hide your key projects, capstones, or research' },
+    projects: { label: 'Projects & Key Initiatives', icon: 'bi-folder2-open', desc: 'Display or hide your key projects, capstones, or research' },
     education: { label: 'Education & Academics', icon: 'bi-mortarboard', desc: 'Display or hide your degrees, schools, and coursework' },
     certificates: { label: 'Certifications & Licenses', icon: 'bi-award', desc: 'Display or hide your professional credentials' }
   };
@@ -107,81 +107,6 @@ export default function SettingsSection({ resumeData, setResumeData }) {
         Customize your resume layout by reordering sections, toggling visibility, adjusting text appearance, and selecting custom header colors.
       </p>
       <div className="d-flex flex-column gap-4">
-        
-        <div className="bg-white">
-          <div className="d-flex align-items-center justify-content-between mb-3">
-            <div>
-              <span className="d-block fw-bold text-dark text-uppercase" style={{ fontSize: '0.9rem' }}>
-                Section Order & Visibility
-              </span>
-              <span className="text-secondary" style={{ fontSize: '0.75rem' }}>Arrange sequence and control which sections appear on your resume</span>
-            </div>
-            <i className="bi bi-list-nested text-muted fs-5"></i>
-          </div>
-
-          <div className="d-flex flex-column gap-2">
-            {visibleOrder.map((secKey, index) => {
-              const sec = sectionMetadata[secKey];
-              if (!sec) return null;
-              const isVisible = settings.visibleSections?.[secKey] !== false;
-
-              return (
-                <div
-                  key={secKey}
-                  className={`p-2 rounded-3 border-0 transition-all d-flex align-items-center justify-content-between ${
-                    isVisible ? 'bg-light border-secondary-subtle' : 'bg-white border-dashed opacity-75'
-                  }`}
-                >
-                  <div className="d-flex align-items-center gap-2">
-                    <div className={`rounded-2 p-1 d-flex align-items-center justify-content-center ${isVisible ? 'bg-dark text-white' : 'bg-secondary-subtle text-muted'}`} style={{ width: '28px', height: '28px' }}>
-                      <i className={`bi ${sec.icon}`} style={{ fontSize: '0.85rem' }}></i>
-                    </div>
-                    <div>
-                      <span className="d-block text-dark fw-semibold" style={{ fontSize: '0.825rem', lineHeight: '1.2' }}>{sec.label}</span>
-                      <span className="text-muted" style={{ fontSize: '0.7rem' }}>{sec.desc}</span>
-                    </div>
-                  </div>
-
-                  <div className="d-flex align-items-center gap-5">
-                    <div className="btn-group btn-group-sm shadow-none" role="group">
-                      <button
-                        type="button"
-                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
-                        disabled={index === 0}
-                        onClick={() => moveSection(currentOrder.indexOf(secKey), 'up')}
-                        title="Move Up"
-                      >
-                        <i className="bi bi-chevron-up" style={{ fontSize: '0.75rem' }}></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
-                        disabled={index === visibleOrder.length - 1}
-                        onClick={() => moveSection(currentOrder.indexOf(secKey), 'down')}
-                        title="Move Down"
-                      >
-                        <i className="bi bi-chevron-down" style={{ fontSize: '0.75rem' }}></i>
-                      </button>
-                    </div>
-
-                    <div className="form-check form-switch m-0 ps-2 border-start">
-                      <input
-                        className="form-check-input cursor-pointer shadow-none"
-                        type="checkbox"
-                        role="switch"
-                        id={`toggle-${secKey}`}
-                        checked={isVisible}
-                        onChange={() => handleVisibilityToggle(secKey)}
-                        style={{ width: '36px', height: '18px' }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         <div className="bg-white">
           <div className="d-flex align-items-center justify-content-between mb-3">
             <div>
@@ -194,22 +119,33 @@ export default function SettingsSection({ resumeData, setResumeData }) {
           </div>
 
           <div className="mb-3">
-            <label className="form-label text-dark fw-semibold small mb-1">Font Style</label>
-            <select
-              className="form-select form-select-sm rounded-3 text-dark fw-medium shadow-none py-2"
-              value={settings.fontFamily}
-              onChange={(e) => handleStyleChange('fontFamily', e.target.value)}
-              style={{ fontSize: '0.825rem' }}
-            >
-              {typography.map((font, idx) => (
-                <option key={idx} value={font.value}>{font.label}</option>
-              ))}
-            </select>
+            <label className="form-label text-dark fw-medium small mb-2 d-block">Font Style</label>
+            <div className="btn-group w-100 bg-light p-1 rounded-2 border" role="group">
+              <div className="row g-2 w-100 m-0">
+                {typography.map((font, idx) => {
+                  const active = settings.fontFamily === font.value;
+                  return (
+                    <div key={idx} className="col-3 m-0">
+                      <button
+                        type="button"
+                        className={`w-100 btn btn-sm rounded-2 py-1 border transition-all text-center d-flex flex-column align-items-center justify-content-center shadow-none ${
+                          active ? 'bg-dark text-white border-dark shadow-xs' : 'text-secondary bg-transparent border-0'
+                        }`}
+                        onClick={() => handleStyleChange('fontFamily', font.value)}
+                        style={{ fontSize: '0.8rem', fontFamily: font.value }}
+                      >
+                        <span className="fw-semibold text-truncate w-100">{font.label}</span>
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="mb-3">
             <label className="form-label text-dark fw-semibold small mb-1">Overall Text Size</label>
-            <div className="btn-group w-100" role="group">
+            <div className="btn-group w-100 bg-light p-1 rounded-2 border" role="group">
               {[
                 { key: 'small', label: 'Compact' },
                 { key: 'normal', label: 'Standard' },
@@ -220,7 +156,8 @@ export default function SettingsSection({ resumeData, setResumeData }) {
                   <button
                     key={scale.key}
                     type="button"
-                    className={`btn btn-sm fw-medium shadow-none py-1 ${active ? 'btn-dark text-white' : 'btn-outline-secondary text-secondary bg-light border-secondary-subtle'}`}
+                    className={`btn btn-sm fw-medium rounded-2 transition-all shadow-none py-1 d-flex align-items-center justify-content-center ${active ? 'bg-dark text-white shadow-xs' : 'text-secondary bg-transparent border-0'
+                      }`}
                     onClick={() => handleStyleChange('fontSize', scale.key)}
                     style={{ fontSize: '0.8rem' }}
                   >
@@ -232,15 +169,16 @@ export default function SettingsSection({ resumeData, setResumeData }) {
           </div>
 
           <div>
-            <label className="form-label text-dark fw-semibold small mb-1">Section Heading Size (px)</label>
-            <div className="btn-group w-100" role="group">
+            <label className="form-label text-dark fw-semibold small mb-1">Section Heading Size</label>
+            <div className="btn-group w-100 bg-light p-1 rounded-2 border" role="group">
               {headingSizeOptions.map((pxValue) => {
                 const active = (settings.headingSizePx === pxValue) || (!settings.headingSizePx && pxValue === '14px');
                 return (
                   <button
                     key={pxValue}
                     type="button"
-                    className={`btn btn-sm fw-medium shadow-none py-1 ${active ? 'btn-dark text-white' : 'btn-outline-secondary text-secondary bg-light border-secondary-subtle'}`}
+                    className={`btn btn-sm fw-medium rounded-2 transition-all shadow-none py-1 d-flex align-items-center justify-content-center ${active ? 'bg-dark text-white shadow-xs' : 'text-secondary bg-transparent border-0'
+                      }`}
                     onClick={() => handleStyleChange('headingSizePx', pxValue)}
                     style={{ fontSize: '0.8rem' }}
                   >
@@ -292,9 +230,8 @@ export default function SettingsSection({ resumeData, setResumeData }) {
                   <div key={i} className="col-4">
                     <button
                       type="button"
-                      className={`w-100 btn btn-sm d-flex align-items-center gap-2 py-2 px-2 rounded-3 border transition-all text-start shadow-none ${
-                        isSelected ? 'bg-dark text-white border-dark' : 'bg-light border-secondary-subtle text-dark hover-bg-white'
-                      }`}
+                      className={`w-100 btn btn-sm d-flex align-items-center gap-2 py-2 px-2 rounded-3 border transition-all text-start shadow-none ${isSelected ? 'bg-dark text-white border-dark' : 'bg-light border-secondary-subtle text-dark hover-bg-white'
+                        }`}
                       onClick={() => handleStyleChange('titleColor', item.hex)}
                     >
                       <span className="rounded-circle border shadow-xs" style={{ width: '14px', height: '14px', backgroundColor: item.hex, flexShrink: 0 }}></span>
@@ -306,6 +243,80 @@ export default function SettingsSection({ resumeData, setResumeData }) {
             </div>
           </div>
         </div>
+
+         <div className="bg-white mb-4">
+          <div className="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <span className="d-block fw-bold text-dark text-uppercase" style={{ fontSize: '0.9rem' }}>
+                Section Order & Visibility
+              </span>
+              <span className="text-secondary" style={{ fontSize: '0.75rem' }}>Arrange sequence and control which sections appear on your resume</span>
+            </div>
+            <i className="bi bi-list-nested text-muted fs-5"></i>
+          </div>
+
+          <div className="d-flex flex-column gap-2">
+            {visibleOrder.map((secKey, index) => {
+              const sec = sectionMetadata[secKey];
+              if (!sec) return null;
+              const isVisible = settings.visibleSections?.[secKey] !== false;
+
+              return (
+                <div
+                  key={secKey}
+                  className={`p-2 rounded-3 border-0 transition-all d-flex align-items-center justify-content-between ${isVisible ? 'bg-light border-secondary-subtle' : 'bg-white border-dashed opacity-75'
+                    }`}
+                >
+                  <div className="d-flex align-items-center gap-2">
+                    <div className={`rounded-2 p-1 d-flex align-items-center justify-content-center ${isVisible ? 'bg-dark text-white' : 'bg-secondary-subtle text-muted'}`} style={{ width: '28px', height: '28px' }}>
+                      <i className={`bi ${sec.icon}`} style={{ fontSize: '0.85rem' }}></i>
+                    </div>
+                    <div>
+                      <span className="d-block text-dark fw-semibold" style={{ fontSize: '0.825rem', lineHeight: '1.2' }}>{sec.label}</span>
+                      <span className="text-muted" style={{ fontSize: '0.7rem' }}>{sec.desc}</span>
+                    </div>
+                  </div>
+
+                  <div className="d-flex align-items-center gap-5">
+                    <div className="btn-group btn-group-sm shadow-none" role="group">
+                      <button
+                        type="button"
+                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
+                        disabled={index === 0}
+                        onClick={() => moveSection(currentOrder.indexOf(secKey), 'up')}
+                        title="Move Up"
+                      >
+                        <i className="bi bi-chevron-up" style={{ fontSize: '0.75rem' }}></i>
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-white btn-sm border py-0 px-2 shadow-sm"
+                        disabled={index === visibleOrder.length - 1}
+                        onClick={() => moveSection(currentOrder.indexOf(secKey), 'down')}
+                        title="Move Down"
+                      >
+                        <i className="bi bi-chevron-down" style={{ fontSize: '0.75rem' }}></i>
+                      </button>
+                    </div>
+
+                    <div className="form-check form-switch m-0 ps-2 border-start">
+                      <input
+                        className="form-check-input cursor-pointer shadow-none"
+                        type="checkbox"
+                        role="switch"
+                        id={`toggle-${secKey}`}
+                        checked={isVisible}
+                        onChange={() => handleVisibilityToggle(secKey)}
+                        style={{ width: '36px', height: '18px' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        
       </div>
     </div>
   );

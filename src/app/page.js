@@ -2,6 +2,7 @@ import Navbar from '../components/layout/navbar';
 import Hero from '../components/landing/hero';
 import Formula from '../components/landing/formula';
 import Pay from '../components/landing/nopay';
+import Template from '../components/landing/template';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <main className="flex-grow-1">
         <Hero />
         <Pay />
+        <Template />
         <Formula />
       </main>
     </div>

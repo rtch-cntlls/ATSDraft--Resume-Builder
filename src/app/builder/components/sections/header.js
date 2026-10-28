@@ -177,35 +177,32 @@ export default function HeaderSection({ resumeData, setResumeData }) {
         </p>
 
         <div className="d-flex flex-column gap-4">
-          <div className="card bg-light border-0 shadow-sm p-3 rounded-3">
-            <label className="form-label text-dark fw-bold small mb-2 d-block">
-              Text Alignment
+          <div className="bg-white">
+            <label className="form-label text-dark fw-semibold small mb-2 d-block">
+              Text Alignment Style
             </label>
-            <div className="btn-group w-100" role="group">
-              <button
-                type="button"
-                className={`btn btn-sm ${textAlign === 'text-start' ? 'btn-dark' : 'btn-outline-secondary'}`}
-                onClick={() => handleTextChange('textAlign', 'text-start')}
-                style={{ fontSize: '0.8rem' }}
-              >
-                Left Align
-              </button>
-              <button
-                type="button"
-                className={`btn btn-sm ${textAlign === 'text-center' ? 'btn-dark' : 'btn-outline-secondary'}`}
-                onClick={() => handleTextChange('textAlign', 'text-center')}
-                 style={{ fontSize: '0.8rem' }}
-              >
-                Center Align
-              </button>
-              <button
-                type="button"
-                className={`btn btn-sm ${textAlign === 'text-end' ? 'btn-dark' : 'btn-outline-secondary'}`}
-                onClick={() => handleTextChange('textAlign', 'text-end')}
-                 style={{ fontSize: '0.8rem' }}
-              >
-                Right Align
-              </button>
+            <div className="btn-group w-100 bg-light p-1 rounded-2 border" role="group">
+              {[
+                { key: 'text-start', label: 'Left Align', icon: 'bi-text-left' },
+                { key: 'text-center', label: 'Center Align', icon: 'bi-text-center' },
+                { key: 'text-end', label: 'Right Align', icon: 'bi-text-right' }
+              ].map((item) => {
+                const active = textAlign === item.key;
+                return (
+                  <button
+                    key={item.key}
+                    type="button"
+                    className={`btn btn-sm fw-medium rounded-2 transition-all shadow-none py-1 d-flex align-items-center justify-content-center gap-1.5 ${
+                      active ? 'bg-dark text-white shadow-xs' : 'text-secondary bg-transparent border-0 hover-dark'
+                    }`}
+                    onClick={() => handleTextChange('textAlign', item.key)}
+                    style={{ fontSize: '0.85rem' }}
+                  >
+                    <i className={`bi me-1 fs-6 ${item.icon}`}></i>
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 

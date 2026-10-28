@@ -6,7 +6,7 @@ export const atsResumeTemplate = {
         location: 'City, Country',
         linkedin: 'linkedin.com/in/johndoe',
         github: 'github.com/johndoe',
-        headerOrder: ['location', 'phone', 'email', 'linkedin']
+        headerOrder: ['location', 'phone', 'email', 'linkedin', 'github']
     },
     summaryTitle: 'Professional Summary',
     summary: 'Dedicated and versatile professional with a strong foundation in project execution, problem-solving, and cross-functional collaboration. Proven ability to streamline operations, analyze data, and deliver impactful results in fast-paced environments.',

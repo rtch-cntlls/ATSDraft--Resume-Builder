@@ -16,12 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://resumake-builder.vercel.app/'),
+  metadataBase: new URL('https://resumake-builder.vercel.app'),
   title: {
     default: "ResuMake | Free ATS-Friendly Resume Builder",
     template: "%s | ResuMake",
   },
   description: "Build professional, ATS-optimized resumes in minutes with live previews and instant PDF downloads.",
+
+  verification: {
+    google: 'google4d297be11b314d97.html',
+  },
 
   icons: {
     icon: '/logo/secondary.png',
@@ -54,7 +58,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://resumake-builder.vercel.app/',
+    url: 'https://resumake-builder.vercel.app',
     title: 'ResuMake | Free ATS-Friendly Resume Builder',
     description: 'Create tailored, ATS-compliant resumes quickly with automated formatting and live PDF export.',
     siteName: 'ResuMake Workspace',

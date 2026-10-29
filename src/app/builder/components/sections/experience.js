@@ -1,5 +1,5 @@
 export default function WorkExperienceSection({ resumeData, setResumeData }) {
-  const sectionTitle = resumeData.workExperienceTitle || 'Work Experience';
+  const sectionTitle = resumeData.workExperienceTitle || '';
 
   const handleTitleChange = (value) => {
     setResumeData({

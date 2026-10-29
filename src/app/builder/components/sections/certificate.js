@@ -1,5 +1,5 @@
 export default function CertificatesSection({ resumeData, setResumeData }) {
-  const sectionTitle = resumeData.certificatesTitle || 'Certificates';
+  const sectionTitle = resumeData.certificatesTitle || '';
 
   const handleTitleChange = (value) => {
     setResumeData({

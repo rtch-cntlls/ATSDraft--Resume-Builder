@@ -1,5 +1,5 @@
 export default function EducationSection({ resumeData, setResumeData }) {
-  const sectionTitle = resumeData.educationTitle || 'Education';
+  const sectionTitle = resumeData.educationTitle || '';
 
   const handleTitleChange = (value) => {
     setResumeData({

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function SkillsSection({ resumeData, setResumeData }) {
-  const sectionTitle = resumeData.skillsTitle || 'Skills';
+  const sectionTitle = resumeData.skillsTitle || '';
 
   const skillsConfig = resumeData.skillsConfig || {
     mode: 'categorized',

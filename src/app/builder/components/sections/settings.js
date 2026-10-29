@@ -14,7 +14,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
     titleColor: '#0f172a',
     fontFamily: 'Arial, sans-serif',
     fontSize: 'normal',
-    headingSizePx: '14px' // Default heading size
+    headingSizePx: '14px'
   };
 
   const updateSettings = (newSettings) => {
@@ -268,7 +268,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
                     }`}
                 >
                   <div className="d-flex align-items-center gap-2">
-                    <div className={`rounded-2 p-1 d-flex align-items-center justify-content-center ${isVisible ? 'bg-dark text-white' : 'bg-secondary-subtle text-muted'}`} style={{ width: '28px', height: '28px' }}>
+                    <div className={`rounded-2 p-1 d-none d-lg-flex align-items-center justify-content-center ${isVisible ? 'bg-dark text-white' : 'bg-secondary-subtle text-muted'}`} style={{ width: '28px', height: '28px' }}>
                       <i className={`bi ${sec.icon}`} style={{ fontSize: '0.85rem' }}></i>
                     </div>
                     <div>

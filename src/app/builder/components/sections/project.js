@@ -2,7 +2,7 @@
 
 export default function ProjectSection({ resumeData, setResumeData }) {
   const isEnabled = resumeData?.settings?.visibleSections?.projects ?? false;
-  const sectionTitle = resumeData.projectsTitle || 'Projects & Key Initiatives';
+  const sectionTitle = resumeData.projectsTitle || '';
 
   const handleToggleSection = (e) => {
     const checked = e.target.checked;

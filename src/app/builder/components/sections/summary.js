@@ -1,6 +1,6 @@
 export default function SummarySection({ resumeData, setResumeData }) {
   const summaryText = resumeData.summary || '';
-  const sectionTitle = resumeData.summaryTitle || 'Professional Summary';
+  const sectionTitle = resumeData.summaryTitle || '';
   const characterCount = summaryText.length;
   const recommendedMax = 500;
 

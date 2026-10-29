@@ -71,7 +71,7 @@ export default function Navbar() {
                   href="#features"
                   className="nav-link text-dark hover-primary"
                 >
-                  Feature
+                  Features
                 </a>
               </li>
             </ul>

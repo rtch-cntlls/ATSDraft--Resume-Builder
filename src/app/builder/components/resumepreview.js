@@ -109,7 +109,7 @@ export default function ResumePreview({ resumeData }) {
                       {itemList.map((item, i) => (
                         <div key={i} className="col ps-0" style={{ fontFamily: activeFontFamily }}>
                           <div className="d-flex align-items-center" style={{ fontFamily: activeFontFamily }}>
-                            <span className="me-2 fw-bold" style={{ fontSize: '0.75rem', fontFamily: activeFontFamily }}>•</span>
+                           <span className="me-2 fw-bold" style={{ fontSize: '1.1rem', fontFamily: activeFontFamily, lineHeight: '1' }}>•</span>
                             <span style={{ fontFamily: activeFontFamily }}>{item}</span>
                           </div>
                         </div>

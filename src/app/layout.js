@@ -24,7 +24,7 @@ export const metadata = {
   description: "Build professional, ATS-optimized resumes in minutes with live previews and instant PDF downloads.",
 
   verification: {
-    google: 'google4d297be11b314d97.html',
+    google: 'google4d297be11b314d97',
   },
 
   icons: {

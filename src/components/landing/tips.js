@@ -1,14 +1,14 @@
 import { resumeFormulaSteps, formulaExample, formulaHeaderData } from '../../data/FormulaData';
 
-export default function ResumeFormula() {
+export default function Tips() {
   const exampleParts = [
   { key: 'verb', label: 'Action verb', text: formulaExample.actionVerb },
   { key: 'resp', label: 'Responsibility', text: formulaExample.responsibility },
   { key: 'result', label: 'Result', text: formulaExample.result },
 ];
   return (
-    <section id="how-it-works" className="py-5 bg-white">
-      <div className="container py-4">
+    <section id="tips" className="py-5 bg-white">
+      <div className="container py-md-4 py-2">
         <div className="text-center max-w-2xl mx-auto mb-5">
           <h1 className="fw-bold text-dark">
             {formulaHeaderData.title}
@@ -18,7 +18,7 @@ export default function ResumeFormula() {
           </p>
         </div>
 
-        <div className="row g-4 mb-5">
+        <div className="row g-md-4 g-3 mb-md-5 mb-3">
           {resumeFormulaSteps.map((item, idx) => (
             <div className="col-md-4" key={idx}>
               <div className="card h-100 border-0 bg-white shadow-sm rounded-4 p-4 position-relative overflow-hidden">

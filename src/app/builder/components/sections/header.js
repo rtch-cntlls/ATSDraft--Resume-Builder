@@ -86,7 +86,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
             <input
               type="text"
               className="form-control form-control-sm rounded-3 text-dark fw-medium"
-              placeholder="e.g. John Doe"
+              placeholder="e.g. your Full Name"
               value={resumeData.header.fullName || ''}
               onChange={(e) => handleTextChange('fullName', e.target.value)}
             />
@@ -101,7 +101,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                 <input
                   type="email"
                   className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                  placeholder="e.g. john.doe@email.com"
+                  placeholder="e.g. your@email.com"
                   value={resumeData.header.email || ''}
                   onChange={(e) => handleTextChange('email', e.target.value)}
                 />
@@ -113,7 +113,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                 <input
                   type="text"
                   className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                  placeholder="e.g. +63 912 345 6789"
+                  placeholder="e.g. +63 9...."
                   value={resumeData.header.phone || ''}
                   onChange={(e) => handleTextChange('phone', e.target.value)}
                 />
@@ -144,7 +144,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                   <input
                     type="text"
                     className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                    placeholder="e.g. linkedin.com/in/johndoe"
+                    placeholder="e.g. your linkedin profile"
                     value={resumeData.header.linkedin || ''}
                     onChange={(e) => handleTextChange('linkedin', e.target.value)}
                   />
@@ -157,7 +157,7 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                   <input
                     type="text"
                     className="form-control form-control-sm rounded-3 text-dark fw-medium"
-                    placeholder="e.g. github.com/johndoe or johndoe.com"
+                    placeholder="e.g. website or github link"
                     value={resumeData.header.github || ''}
                     onChange={(e) => handleTextChange('github', e.target.value)}
                   />
@@ -196,9 +196,9 @@ export default function HeaderSection({ resumeData, setResumeData }) {
                       active ? 'bg-dark text-white shadow-xs' : 'text-secondary bg-transparent border-0 hover-dark'
                     }`}
                     onClick={() => handleTextChange('textAlign', item.key)}
-                    style={{ fontSize: '0.85rem' }}
+                    style={{ fontSize: '0.8rem' }}
                   >
-                    <i className={`bi me-1 fs-6 ${item.icon}`}></i>
+                    <i className={`bi me-1 ${item.icon}`}></i>
                     <span>{item.label}</span>
                   </button>
                 );

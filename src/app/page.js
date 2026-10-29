@@ -1,8 +1,10 @@
 import Navbar from '../components/layout/navbar';
 import Hero from '../components/landing/hero';
-import Formula from '../components/landing/formula';
+import Tips from '../components/landing/tips';
 import Pay from '../components/landing/nopay';
-import Template from '../components/landing/template';
+import ATS from '../components/landing/ats';
+import Feature from '../components/landing/features';
+import Footer from '../components/layout/footer';
 
 export default function Home() {
   return (
@@ -11,9 +13,11 @@ export default function Home() {
       <main className="flex-grow-1">
         <Hero />
         <Pay />
-        <Template />
-        <Formula />
+        <ATS />
+        <Tips />
+        <Feature />
       </main>
+      <Footer />
     </div>
   );
 }

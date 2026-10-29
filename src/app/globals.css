@@ -1,67 +1,89 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-*{
-    font-family: 'Plus Jakarta Sans', sans-serif;
+
+* {
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
-.navbar-nav{
-     font-size: clamp(0.8rem, 3vw, 0.95rem);
-     color: black;
+
+.navbar-nav {
+  font-size: clamp(0.8rem, 3vw, 0.95rem);
+  color: black;
 }
-.name{
+
+.name {
   font-family: 'Pacifico', cursive;
   font-size: 1.5rem;
 }
-.logo-workspace{
+
+.brand {
+  font-family: 'Pacifico', cursive;
+}
+
+.logo-workspace {
   font-family: 'Pacifico', cursive;
   font-size: clamp(0.9rem, 3vw, 1.4rem) !important;
 }
-.workspace{
+
+.workspace {
   font-size: clamp(0.9rem, 3vw, 1.4rem) !important;
   font-weight: 800 !important;
 }
-.bg-primary{
+
+.bg-primary {
   background-color: #18a9f7 !important;
 }
-.btn-primary{
+
+.btn-primary {
   background-color: #18a9f7 !important;
 }
-.btn-primary:hover{
+
+.btn-primary:hover {
   border: 1px solid #18a9f7 !important;
 }
-.text-primary{
-    color: #18a9f7 !important;
+
+.text-primary {
+  color: #18a9f7 !important;
 }
-.bg-primary-subtle{
+
+.bg-primary-subtle {
   background-color: #6acbff32 !important;
 }
+
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
 .display-4 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(2rem, 5vw, 2.9rem) !important;
   font-weight: 800 !important;
 }
-.lead{
-    font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+
+.lead {
+  font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
 }
-.sample{
+
+.sample {
   text-justify: inter-word;
   text-align: justify;
 }
-.sample p span{
+
+.sample p span {
   font-size: clamp(0.89rem, 3vw, 1.1rem) !important;
 }
 
-.feature{
+.feature {
   font-size: clamp(0.75rem, 3vw, 0.9rem) !important;
 }
-.badge-feature{
+
+.badge-feature {
   font-size: clamp(0.6rem, 3vw, 0.75rem) !important;
 }
-.badge-feature1{
+
+.badge-feature1 {
   font-size: clamp(0.75rem, 3vw, 0.98rem) !important;
 }
+
 .overflow-y-auto::-webkit-scrollbar,
 .custom-saas-scrollbar::-webkit-scrollbar {
   width: 6px;

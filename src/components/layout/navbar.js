@@ -14,7 +14,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky-top bg-white border-bottom border-light-subtle shadow-sm">
+    <header className="sticky-top bg-white border-bottom border-light-subtle shadow-sm" style={{ overflowAnchor: 'none' }}>
       <nav className="navbar navbar-expand-lg navbar-light py-2 py-md-3">
         <div className="container">
           <Link href="#hero" className="navbar-brand d-flex align-items-center gap-2 text-dark text-decoration-none py-1">
@@ -36,32 +36,42 @@ export default function Navbar() {
           </Link>
 
           <button
-            className="navbar-toggler border-0 shadow-none p-2"
+            className="navbar-toggler border-0 shadow-none px-2 py-1"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#mainNavbar"
             aria-controls="mainNavbar"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            style={{ fontSize: '0.85rem' }}
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon" style={{ width: '1.2em', height: '1.2em' }}></span>
           </button>
 
           <div className="collapse navbar-collapse mt-3 mt-lg-0" id="mainNavbar">
             <ul className="navbar-nav mx-auto mb-3 mb-lg-0 fw-medium gap-lg-2">
               <li className="nav-item">
-                <a className="nav-link px-3 py-2 rounded-2 hover-primary" href="#features">
-                  Templates
+                <a
+                  href="#ats-info"
+                  className="nav-link text-dark hover-primary"
+                >
+                  Why ATS?
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-3 py-2 rounded-2 hover-primary" href="#how-it-works">
-                  How It Works
+                <a
+                  href="#tips"
+                  className="nav-link text-dark hover-primary"
+                >
+                  Tips
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-3 py-2 rounded-2 hover-primary" href="#faq">
-                  FAQ
+                <a
+                  href="#features"
+                  className="nav-link text-dark hover-primary"
+                >
+                  Feature
                 </a>
               </li>
             </ul>

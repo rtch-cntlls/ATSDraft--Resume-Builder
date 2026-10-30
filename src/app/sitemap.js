@@ -1,17 +1,20 @@
+
+const baseUrl = "https://rolepage.vercel.app";
+
 export default function sitemap() {
-  const baseUrl = 'https://resumake-builder.vercel.app';
+  const lastModified = new Date();
 
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      lastModified,
+      changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${baseUrl}/builder`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
+      lastModified,
+      changeFrequency: "weekly",
       priority: 0.9,
     },
   ];

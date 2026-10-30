@@ -21,17 +21,17 @@ export default function Footer() {
             <Link href="#hero" onClick={(e) => handleScroll(e, 'hero')} className="d-flex align-items-center gap-2 text-dark text-decoration-none mb-3">
               <Image 
                 src={Logo} 
-                alt="ResuMake Logo" 
+                alt="RolePage Logo" 
                 width={38} 
                 height={32} 
                 className="d-inline-block align-text-top" 
               />
               <div className="d-flex flex-column lh-1">
-                <span className="tracking-tight fs-5 brand">
-                  Resu<span className="text-primary brand">Make</span>
+                <span className="tracking-tight fs-5 brand ms-3">
+                  Role<span className="text-primary brand">Page</span>
                 </span>
                 <span className="text-muted fw-normal" style={{ fontSize: '0.65rem' }}>
-                  Crafted for Career Success
+                   Resume Builder
                 </span>
               </div>
             </Link>

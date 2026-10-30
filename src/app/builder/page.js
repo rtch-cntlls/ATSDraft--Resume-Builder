@@ -8,6 +8,7 @@ import Logo from '../../../public/logo/primary.png';
 import BuilderSidebar from './components/buildersidebar';
 import BuilderFormArea from './components/builderformarea';
 import ResumePreview from './components/resumepreview';
+import MobileResumePreview from './components/mobileresumepreview';
 import BuilderSkeleton from './components/builderskeleton';
 
 import { atsResumeTemplate } from '../../data/template/ats-resume1';
@@ -40,48 +41,10 @@ function BuilderContent() {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-    const [pdfPreviewUrl, setPdfPreviewUrl] = useState(null);
-    const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+    const [isMobilePreviewOpen, setIsMobilePreviewOpen] = useState(false);
 
     const [resumeData, setResumeData] = useState(() => getInitialResumeData());
     const resumePreviewRef = useRef(null);
-
-    const handleOpenPdfPreview = async () => {
-        if (typeof window !== 'undefined' && resumePreviewRef.current) {
-            setIsPreviewLoading(true);
-            try {
-                const html2pdf = (await import('html2pdf.js')).default;
-                const element = resumePreviewRef.current;
-
-                const options = {
-                    margin: 0,
-                    filename: `${resumeData.header.fullName.toLowerCase().replace(/\s+/g, '-')}-resume.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: {
-                        scale: 2,
-                        useCORS: true,
-                        letterRendering: true,
-                        windowWidth: 794
-                    },
-                    jsPDF: {
-                        unit: 'mm',
-                        format: 'a4',
-                        orientation: 'portrait'
-                    }
-                };
-
-                const pdfWorker = html2pdf().from(element).set(options);
-                
-                const pdfDataUri = await pdfWorker.outputPdf('datauristring');
-                setPdfPreviewUrl(pdfDataUri);
-
-            } catch (error) {
-                console.error("Failed to generate PDF preview:", error);
-            } finally {
-                setIsPreviewLoading(false);
-            }
-        }
-    };
 
     const handleDownloadPdf = async () => {
         if (typeof window !== 'undefined') {
@@ -137,28 +100,11 @@ function BuilderContent() {
                 </div>
             </header>
 
-            {pdfPreviewUrl && (
-                <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex flex-column justify-content-center align-items-center p-2 p-md-3" style={{ zIndex: 1080 }}>
-                    <div className="bg-white w-100 h-100 rounded-3 d-flex flex-column overflow-hidden shadow-lg" style={{ maxWidth: '800px', maxHeight: '90vh' }}>
-                        <div className="px-3 py-2 bg-light border-bottom d-flex justify-content-between align-items-center flex-shrink-0">
-                            <span className="fw-bold text-dark fs-6">PDF Resume Preview</span>
-                            <button
-                                className="btn btn-sm btn-outline-secondary rounded-circle"
-                                onClick={() => setPdfPreviewUrl(null)}
-                            >
-                                <i className="bi bi-x-lg"></i>
-                            </button>
-                        </div>
-                        <div className="flex-grow-1 bg-secondary-subtle">
-                            <iframe
-                                src={pdfPreviewUrl}
-                                className="w-100 h-100 border-0"
-                                title="Resume PDF Preview"
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
+            <MobileResumePreview 
+                resumeData={resumeData} 
+                isOpen={isMobilePreviewOpen} 
+                onClose={() => setIsMobilePreviewOpen(false)} 
+            />
 
             <div className="container-fluid flex-grow-1 overflow-hidden p-0 position-relative">
                 {isMobileOpen && (
@@ -196,13 +142,11 @@ function BuilderContent() {
                                 </div>
 
                                 <button
-                                    onClick={handleOpenPdfPreview}
-                                    disabled={isPreviewLoading}
+                                    onClick={() => setIsMobilePreviewOpen(true)}
                                     className="btn btn-outline-secondary rounded-3 btn-sm text-decoration-none fw-semibold d-inline-flex align-items-center gap-1"
                                     style={{ fontSize: '0.8rem' }}
                                 >
-                                    <i className={`bi ${isPreviewLoading ? 'bi-hourglass-split' : 'bi-eye'}`}></i>
-                                    {isPreviewLoading ? 'Preparing...' : 'Preview PDF'}
+                                    <i className="bi bi-eye"></i> Preview Resume
                                 </button>
                             </div>
 

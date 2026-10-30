@@ -85,26 +85,22 @@ body {
   font-size: clamp(0.75rem, 3vw, 0.98rem) !important;
 }
 
-.overflow-y-auto::-webkit-scrollbar,
-.custom-saas-scrollbar::-webkit-scrollbar {
+.overflow-y-auto::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.overflow-y-auto::-webkit-scrollbar-track,
-.custom-saas-scrollbar::-webkit-scrollbar-track {
+.overflow-y-auto::-webkit-scrollbar-track {
   background: #f8f9fa;
   border-radius: 4px;
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb,
-.custom-saas-scrollbar::-webkit-scrollbar-thumb {
+.overflow-y-auto::-webkit-scrollbar-thumb {
   background: #ced4da;
   border-radius: 4px;
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb:hover,
-.custom-saas-scrollbar::-webkit-scrollbar-thumb:hover {
+.overflow-y-auto::-webkit-scrollbar-thumb:hover{
   background: #6c757d;
 }
 
@@ -112,7 +108,7 @@ body {
 .builder-preview-col {
   height: calc(100vh - 57px) !important;
   max-height: calc(100vh - 57px) !important;
-  overflow: hidden !important;
+  overflow: auto !important; 
 }
 
 .builder-sidebar {

@@ -4,6 +4,12 @@ export default function ResumePreview({ resumeData }) {
   const header = resumeData.header || {};
   const order = header.headerOrder || ['location', 'phone', 'email', 'linkedin', 'github'];
   const textAlign = header.textAlign || 'text-center';
+  const photoShape = resumeData.settings?.photoShape || 'circle';
+
+  const isPhotoTemplate = resumeData.settings?.templateId === 'photo-header-v1';
+  
+  const defaultPlaceholder = '/images/placeholder-profile.jpg';
+  const photoUrl = header.photoUrl || (isPhotoTemplate ? defaultPlaceholder : '');
 
   const flexAlignClass =
     textAlign === 'text-start' ? 'justify-content-start' :
@@ -52,6 +58,8 @@ export default function ResumePreview({ resumeData }) {
     color: settings.titleColor || '#0f172a',
     fontFamily: activeFontFamily
   };
+
+  const photoBorderRadius = photoShape === 'circle' ? '50%' : photoShape === 'rounded' ? '12px' : '0px';
 
   const renderSection = (sectionKey) => {
     if (sectionKey === 'summary' && visible.summary !== false && resumeData.summary) {
@@ -109,7 +117,7 @@ export default function ResumePreview({ resumeData }) {
                       {itemList.map((item, i) => (
                         <div key={i} className="col ps-0" style={{ fontFamily: activeFontFamily }}>
                           <div className="d-flex align-items-center" style={{ fontFamily: activeFontFamily }}>
-                           <span className="me-2 fw-bold" style={{ fontSize: '1.1rem', fontFamily: activeFontFamily, lineHeight: '1' }}>•</span>
+                            <span className="me-2 fw-bold" style={{ fontSize: '1.1rem', fontFamily: activeFontFamily, lineHeight: '1' }}>•</span>
                             <span style={{ fontFamily: activeFontFamily }}>{item}</span>
                           </div>
                         </div>
@@ -139,9 +147,9 @@ export default function ResumePreview({ resumeData }) {
               <div key={idx} className="mb-2" style={{ fontFamily: activeFontFamily }}>
                 <div className="d-flex justify-content-between align-items-center" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})`, lineHeight: '1.15' }}>
                   <span className="fw-bold text-dark small" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{work.jobTitle}</span>
-                  <span className="text-muted small fw-medium fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{work.startDate} {work.endDate}</span>
+                  <span className=" small fw-medium fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{work.startDate} {work.endDate}</span>
                 </div>
-                <div className="text-muted small mb-1 fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{work.company} {work.location ? `- ${work.location}` : ''}</div>
+                <div className=" small mb-1 fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{work.company} {work.location ? `- ${work.location}` : ''}</div>
                 {descLines.length > 0 && (
                   <ul className="list-unstyled mb-0 ms-0 ps-0 d-flex flex-column" style={{ fontFamily: activeFontFamily, gap: '2px' }}>
                     {descLines.map((line, i) => {
@@ -177,10 +185,10 @@ export default function ResumePreview({ resumeData }) {
               <div key={idx} className="mb-2" style={{ fontFamily: activeFontFamily }}>
                 <div className="d-flex justify-content-between align-items-center" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})`, lineHeight: '1.15' }}>
                   <span className="fw-bold text-dark small" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{proj.title}</span>
-                  <span className="text-muted small fw-medium fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{proj.date}</span>
+                  <span className=" small fw-medium fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{proj.date}</span>
                 </div>
                 {proj.technologies && (
-                  <div className="text-muted small mb-1 fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>
+                  <div className=" small mb-1 fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>
                     {proj.technologies}
                   </div>
                 )}
@@ -214,9 +222,9 @@ export default function ResumePreview({ resumeData }) {
             <div key={idx} className="mb-1" style={{ fontFamily: activeFontFamily, lineHeight: '1.15' }}>
               <div className="d-flex justify-content-between align-items-center" style={{ fontFamily: activeFontFamily }}>
                 <span className="fw-bold text-dark small" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{edu.degree || edu.level}</span>
-                <span className="text-muted small fw-medium fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{edu.graduationDate}</span>
+                <span className=" small fw-medium fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>{edu.graduationDate}</span>
               </div>
-              <div className="text-muted small fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>
+              <div className=" small fst-italic" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})` }}>
                 {edu.institution} {edu.location ? `- ${edu.location}` : ''}
               </div>
             </div>
@@ -254,33 +262,59 @@ export default function ResumePreview({ resumeData }) {
         minHeight: '923px',
         padding: '0.5in',
         boxSizing: 'border-box',
-        fontFamily: activeFontFamily
+        fontFamily: activeFontFamily,
+        color: '#000000',
+        WebkitFontSmoothing: 'antialiased', 
+        MozOsxFontSmoothing: 'grayscale'
       }}
     >
-      <div className={`border-bottom border-dark pb-3 mb-3 ${textAlign}`} style={{ fontFamily: activeFontFamily }}>
-        <h2
-          className="fw-bold text-dark mb-1 fs-4"
-          style={{
-            fontFamily: activeFontFamily,
-            fontSize: `calc(1.75rem * ${scaleFactor})`,
-            lineHeight: '0.8'
-          }}
-        >
-          {header.fullName}
-        </h2>
+      <div className="border-bottom border-dark pb-3 mb-3" style={{ fontFamily: activeFontFamily }}>
+        <div className={`d-flex align-items-center gap-3 ${photoUrl ? 'justify-content-between' : flexAlignClass}`}>
+          
+          <div className={`flex-grow-1 ${photoUrl ? 'text-start' : textAlign}`}>
+            <h2
+              className="fw-bold text-dark mb-1 fs-4"
+              style={{
+                fontFamily: activeFontFamily,
+                fontSize: `calc(1.75rem * ${scaleFactor})`,
+                lineHeight: '1.1',
+                color: '#000000'
+              }}
+            >
+              {header.fullName}
+            </h2>
 
-        <div
-          className={`text-dark d-flex ${flexAlignClass} align-items-center gap-2 flex-wrap mt-2`}
-          style={{ fontSize: `calc(0.8rem * ${scaleFactor})`, lineHeight: '1.15', fontFamily: activeFontFamily }}
-        >
-          {headerInfoList.map((item, index) => (
-            <span key={index} className="d-inline-flex align-items-center gap-2" style={{ fontFamily: activeFontFamily, lineHeight: '1.15' }}>
-              <span className="m-0 text-dark fw-medium" style={{ fontFamily: activeFontFamily, lineHeight: '0.5' }}>{item}</span>
-              {index < headerInfoList.length - 1 && (
-                <span className="m-0 text-dark" style={{ userSelect: 'none', fontFamily: activeFontFamily, lineHeight: '0.5' }}>|</span>
-              )}
-            </span>
-          ))}
+            <div
+              className={`text-dark d-flex ${photoUrl ? 'justify-content-start' : flexAlignClass} align-items-center gap-2 flex-wrap mt-2`}
+              style={{ fontSize: `calc(0.8rem * ${scaleFactor})`, lineHeight: '1.15', fontFamily: activeFontFamily }}
+            >
+              {headerInfoList.map((item, index) => (
+                <span key={index} className="d-inline-flex align-items-center gap-2" style={{ fontFamily: activeFontFamily, lineHeight: '1.15' }}>
+                  <span className="m-0 text-dark fw-medium" style={{ fontFamily: activeFontFamily, lineHeight: '0.5' }}>{item}</span>
+                  {index < headerInfoList.length - 1 && (
+                    <span className="m-0 text-dark" style={{ userSelect: 'none', fontFamily: activeFontFamily, lineHeight: '0.5' }}>|</span>
+                  )}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {photoUrl && (
+            <div className="flex-shrink-0 ms-2" style={{ width: '80px', height: '80px' }}>
+              <img
+                src={photoUrl}
+                alt={`${header.fullName || 'Candidate'}'s Headshot`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: photoBorderRadius,
+                  border: 'none'
+                }}
+              />
+            </div>
+          )}
+
         </div>
       </div>
 

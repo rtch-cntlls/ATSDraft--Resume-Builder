@@ -38,7 +38,7 @@ export default function WorkExperienceSection({ resumeData, setResumeData }) {
     <div className="section-workspace fade-in">
       <div className="mb-4">
         <div className="d-flex align-items-center justify-content-between pb-2 mb-1 border-bottom">
-          <h5 className="fw-bold text-dark mb-0">Work & Professional Experience</h5>
+          <h5 className="fw-bold text-dark mb-0">Work Experience</h5>
           <button className="btn btn-outline-dark btn-sm rounded-pill px-3" onClick={addExperience}>
             <i className="bi bi-plus-lg me-1"></i> Add Position
           </button>

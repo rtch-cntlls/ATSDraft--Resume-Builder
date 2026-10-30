@@ -1,34 +1,41 @@
 'use client';
 
 import { useState, useRef, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '../../../public/logo/primary.png';
 import BuilderSidebar from './components/buildersidebar';
 import BuilderFormArea from './components/builderformarea';
 import ResumePreview from './components/resumepreview';
+import BuilderSkeleton from './components/builderskeleton';
 
 import { atsResumeTemplate } from '../../data/template/ats-resume1';
-
-const getInitialResumeData = () => {
-    return {
-        ...atsResumeTemplate,
-        settings: {
-            ...(atsResumeTemplate.settings || {}),
-            visibleSections: {
-                summary: true,
-                skills: true,
-                workExperience: true,
-                education: true,
-                certificates: true,
-                ...(atsResumeTemplate.settings?.visibleSections || {}),
-                projects: false
-            }
-        }
-    };
-};
+import { atsResumeTemplateWithPhoto } from '../../data/template/ats-resume2';
 
 function BuilderContent() {
+    const searchParams = useSearchParams();
+    const templateParam = searchParams.get('template');
+
+    const getInitialResumeData = () => {
+        const baseTemplate = templateParam === 'photo' ? atsResumeTemplateWithPhoto : atsResumeTemplate;
+        return {
+            ...baseTemplate,
+            settings: {
+                ...(baseTemplate.settings || {}),
+                visibleSections: {
+                    summary: true,
+                    skills: true,
+                    workExperience: true,
+                    education: true,
+                    certificates: true,
+                    ...(baseTemplate.settings?.visibleSections || {}),
+                    projects: templateParam === 'photo' ? true : false
+                }
+            }
+        };
+    };
+
     const [activeSection, setActiveSection] = useState('header');
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -67,7 +74,8 @@ function BuilderContent() {
                 const pdfBlob = await pdfWorker.outputPdf('blob');
                 const blobUrl = URL.createObjectURL(pdfBlob);
 
-                setPdfPreviewUrl(blobUrl);
+                window.open(blobUrl, '_blank');
+
             } catch (error) {
                 console.error("Failed to generate PDF preview:", error);
             } finally {
@@ -119,9 +127,10 @@ function BuilderContent() {
                         </span>
                     </div>
                 </Link>
+
                 <div className="d-flex align-items-center gap-3">
                     <button
-                        className="btn btn-primary btn-download btn-sm rounded-pill px-4 fw-semibold shadow-sm d-inline-flex align-items-center gap-1"
+                        className="btn btn-primary btn-download btn-sm rounded-3 px-4 fw-semibold shadow-sm d-inline-flex align-items-center gap-1"
                         onClick={handleDownloadPdf}
                     >
                         <i className="bi bi-download"></i> Download PDF
@@ -193,7 +202,7 @@ function BuilderContent() {
                                 <button
                                     onClick={handleOpenPdfPreview}
                                     disabled={isPreviewLoading}
-                                    className="btn btn-outline-secondary btn-sm text-decoration-none fw-semibold d-inline-flex align-items-center gap-1"
+                                    className="btn btn-outline-secondary rounded-3 btn-sm text-decoration-none fw-semibold d-inline-flex align-items-center gap-1"
                                     style={{ fontSize: '0.8rem' }}
                                 >
                                     <i className={`bi ${isPreviewLoading ? 'bi-hourglass-split' : 'bi-eye'}`}></i>
@@ -211,8 +220,8 @@ function BuilderContent() {
                         </div>
                     </div>
 
-                    <div className="col-lg-6 bg-secondary-subtle p-3 p-md-4 d-none d-lg-flex justify-content-center align-items-start overflow-y-auto builder-preview-col">
-                        <div className="w-100" style={{ maxWidth: '750px' }} ref={resumePreviewRef}>
+                    <div className="col-lg-6 bg-secondary-subtle p-3 p-md-4 d-none d-lg-flex justify-content-center align-items-start overflow-auto builder-preview-col">
+                        <div className="w-100 d-flex justify-content-center" ref={resumePreviewRef}>
                             <ResumePreview resumeData={resumeData} />
                         </div>
                     </div>
@@ -230,7 +239,7 @@ function BuilderContent() {
 
 export default function BuilderPage() {
     return (
-        <Suspense fallback={<div>Loading builder...</div>}>
+        <Suspense fallback={<BuilderSkeleton />}>
             <BuilderContent />
         </Suspense>
     );

@@ -6,11 +6,11 @@ export const atsResumeTemplate = {
         location: 'City, Country',
         linkedin: 'linkedin.com/in/johndoe',
         github: 'github.com/johndoe',
-        headerOrder: ['location', 'phone', 'email', 'linkedin', 'github']
+        headerOrder: [ 'phone', 'email', 'linkedin', 'github', 'location']
     },
     summaryTitle: 'Professional Summary',
     summary: 'Dedicated and versatile professional with a strong foundation in project execution, problem-solving, and cross-functional collaboration. Proven ability to streamline operations, analyze data, and deliver impactful results in fast-paced environments.',
-    skillsTitle: 'Core Competencies',
+    skillsTitle: 'Skills',
     skillsConfig: {
         mode: 'categorized',
         categories: [
@@ -29,7 +29,7 @@ export const atsResumeTemplate = {
             description: '• Collaborated with team members to execute key project deliverables and optimize internal workflows.\n• Analyzed operational data and generated comprehensive reports to support strategic decision-making.'
         }
     ],
-    projectsTitle: 'Projects & Key Initiatives',
+    projectsTitle: 'Projects',
     projects: [
         {
             id: 1,

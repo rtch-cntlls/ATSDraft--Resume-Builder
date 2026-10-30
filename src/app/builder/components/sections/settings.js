@@ -14,7 +14,8 @@ export default function SettingsSection({ resumeData, setResumeData }) {
     titleColor: '#0f172a',
     fontFamily: 'Arial, sans-serif',
     fontSize: 'normal',
-    headingSizePx: '14px'
+    headingSizePx: '14px',
+    photoShape: 'circle'
   };
 
   const updateSettings = (newSettings) => {
@@ -97,6 +98,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
   });
 
   const headingSizeOptions = ['12px', '14px', '16px', '18px', '20px'];
+  const showPhotoConfig = settings.templateId === 'photo-header-v1';
 
   return (
     <div className="section-workspace fade-in px-1">
@@ -107,6 +109,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
         Customize your resume layout by reordering sections, toggling visibility, adjusting text appearance, and selecting custom header colors.
       </p>
       <div className="d-flex flex-column gap-4">
+        
         <div className="bg-white">
           <div className="d-flex align-items-center justify-content-between mb-3">
             <div>
@@ -168,7 +171,7 @@ export default function SettingsSection({ resumeData, setResumeData }) {
             </div>
           </div>
 
-          <div>
+          <div className="mb-3">
             <label className="form-label text-dark fw-semibold small mb-1">Section Heading Size</label>
             <div className="btn-group w-100 bg-light p-1 rounded-2 border" role="group">
               {headingSizeOptions.map((pxValue) => {
@@ -188,6 +191,34 @@ export default function SettingsSection({ resumeData, setResumeData }) {
               })}
             </div>
           </div>
+
+          {showPhotoConfig && (
+            <div className="pt-2 border-top mt-3">
+              <label className="form-label text-dark fw-semibold small mb-1">Profile Photo Shape</label>
+              <div className="btn-group w-100 bg-light p-1 rounded-2 border" role="group">
+                {[
+                  { key: 'circle', label: 'Circle' },
+                  { key: 'rounded', label: 'Rounded Square' },
+                  { key: 'square', label: 'Square' }
+                ].map((shape) => {
+                  const active = (settings.photoShape === shape.key) || (!settings.photoShape && shape.key === 'circle');
+                  return (
+                    <button
+                      key={shape.key}
+                      type="button"
+                      className={`btn btn-sm fw-medium rounded-2 transition-all shadow-none py-1 d-flex align-items-center justify-content-center ${
+                        active ? 'bg-dark text-white shadow-xs' : 'text-secondary bg-transparent border-0'
+                      }`}
+                      onClick={() => handleStyleChange('photoShape', shape.key)}
+                      style={{ fontSize: '0.8rem' }}
+                    >
+                      {shape.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="bg-white mb-3">

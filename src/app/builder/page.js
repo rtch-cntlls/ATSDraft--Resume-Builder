@@ -71,10 +71,9 @@ function BuilderContent() {
                 };
 
                 const pdfWorker = html2pdf().from(element).set(options);
-                const pdfBlob = await pdfWorker.outputPdf('blob');
-                const blobUrl = URL.createObjectURL(pdfBlob);
-
-                window.open(blobUrl, '_blank');
+                
+                const pdfDataUri = await pdfWorker.outputPdf('datauristring');
+                setPdfPreviewUrl(pdfDataUri);
 
             } catch (error) {
                 console.error("Failed to generate PDF preview:", error);
@@ -139,16 +138,13 @@ function BuilderContent() {
             </header>
 
             {pdfPreviewUrl && (
-                <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex flex-column justify-content-center align-items-center z-3 p-3">
-                    <div className="bg-white w-100 h-100 rounded-3 d-flex flex-column overflow-hidden" style={{ maxWidth: '800px', maxHeight: '90vh' }}>
-                        <div className="px-3 py-2 bg-light border-bottom d-flex justify-content-between align-items-center">
+                <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex flex-column justify-content-center align-items-center p-2 p-md-3" style={{ zIndex: 1080 }}>
+                    <div className="bg-white w-100 h-100 rounded-3 d-flex flex-column overflow-hidden shadow-lg" style={{ maxWidth: '800px', maxHeight: '90vh' }}>
+                        <div className="px-3 py-2 bg-light border-bottom d-flex justify-content-between align-items-center flex-shrink-0">
                             <span className="fw-bold text-dark fs-6">PDF Resume Preview</span>
                             <button
                                 className="btn btn-sm btn-outline-secondary rounded-circle"
-                                onClick={() => {
-                                    URL.revokeObjectURL(pdfPreviewUrl);
-                                    setPdfPreviewUrl(null);
-                                }}
+                                onClick={() => setPdfPreviewUrl(null)}
                             >
                                 <i className="bi bi-x-lg"></i>
                             </button>

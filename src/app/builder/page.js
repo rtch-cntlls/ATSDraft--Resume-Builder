@@ -78,14 +78,14 @@ function BuilderContent() {
                 <Link href="/" className="d-flex align-items-center gap-2 text-dark text-decoration-none py-1">
                     <Image
                         src={Logo}
-                        alt="RolePage Logo"
+                        alt="LikhaPage Logo"
                         width={40}
                         height={34}
                         className="d-inline-block align-text-top"
                     />
                     <div className="d-none d-sm-flex flex-column lh-1">
                         <span className="tracking-tight fs-5 text-dark logo-workspace">
-                            Role<span className="text-primary logo-workspace">Page</span> <span className="workspace">Workspace</span>
+                            Likha<span className="text-primary logo-workspace">Page</span> <span className="workspace">Workspace</span>
                         </span>
                     </div>
                 </Link>

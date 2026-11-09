@@ -15,19 +15,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://rolepage.vercel.app";
-const siteName = "RolePage";
+const siteUrl = "https://LikhaPage.vercel.app";
+const siteName = "LikhaPage";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "RolePage | Free ATS-Friendly Resume Builder",
-    template: "%s | RolePage",
+    default: "LikhaPage | Free ATS-Friendly Resume Builder",
+    template: "%s | LikhaPage",
   },
 
   description:
-    "Create a professional, ATS-friendly resume for free with RolePage. Build, customize, preview, and download your resume as a PDF to take the next step in your career.",
+    "Create a professional, ATS-friendly resume for free with LikhaPage. Build, customize, preview, and download your resume as a PDF to take the next step in your career.",
 
   applicationName: siteName,
 
@@ -44,7 +44,7 @@ export const metadata = {
   },
 
   keywords: [
-    "RolePage",
+    "LikhaPage",
     "Resume Builder",
     "Free Resume Builder",
     "Online Resume Builder",
@@ -85,24 +85,24 @@ export const metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName,
-    title: "RolePage | Create Your Professional Resume",
+    title: "LikhaPage | Create Your Professional Resume",
     description:
-      "Build a professional, ATS-friendly resume with RolePage. Customize your layout, preview your document, and download your resume as a PDF for free.",
+      "Build a professional, ATS-friendly resume with LikhaPage. Customize your layout, preview your document, and download your resume as a PDF for free.",
     images: [
       {
         url: "/logo/secondary.png",
         width: 512,
         height: 512,
-        alt: "RolePage - Free Online Resume Builder",
+        alt: "LikhaPage - Free Online Resume Builder",
       },
     ],
   },
 
   twitter: {
     card: "summary",
-    title: "RolePage | Free ATS-Friendly Resume Builder",
+    title: "LikhaPage | Free ATS-Friendly Resume Builder",
     description:
-      "Create, customize, and download professional ATS-friendly resumes for free with RolePage.",
+      "Create, customize, and download professional ATS-friendly resumes for free with LikhaPage.",
     images: ["/logo/secondary.png"],
   },
 

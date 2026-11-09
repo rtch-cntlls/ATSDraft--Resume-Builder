@@ -20,14 +20,14 @@ export default function Navbar() {
           <Link href="#hero" className="navbar-brand d-flex align-items-center gap-2 text-dark text-decoration-none py-1">
             <Image 
               src={Logo} 
-              alt="RolePage Logo" 
+              alt="LikhaPage Logo" 
               width={42} 
               height={35} 
               className="d-inline-block align-text-top" 
             />
             <div className="d-flex flex-column lh-1">
-              <span className="tracking-tight name ms-1">
-                Role<span className="text-primary name">Page</span>
+              <span className="tracking-tight name">
+                Likha<span className="text-primary name">Page</span>
               </span>
               <span className="text-muted fw-normal" style={{ fontSize: '0.65rem' }}>
                 Resume Builder

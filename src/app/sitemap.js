@@ -1,5 +1,5 @@
 
-const baseUrl = "https://rolepage.vercel.app";
+const baseUrl = "https://LikhaPage.vercel.app";
 
 export default function sitemap() {
   const lastModified = new Date();

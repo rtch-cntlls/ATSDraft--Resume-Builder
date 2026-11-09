@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://LikhaPage.vercel.app";
+const siteUrl = "https://likhapage.vercel.app/";
 const siteName = "LikhaPage";
 
 export const metadata = {

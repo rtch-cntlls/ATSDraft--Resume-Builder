@@ -95,9 +95,12 @@ export default function ResumePreview({ resumeData }) {
             <div className="d-flex flex-column gap-1" style={{ fontFamily: activeFontFamily }}>
               {skillsConfig.categories.map((cat, idx) => (
                 cat.title || cat.items ? (
-                  <div key={idx} className="small text-dark" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})`, lineHeight: '1.15' }}>
-                    <span style={{ fontFamily: activeFontFamily }}>{cat.title}: </span>
-                    <span className="fw-normal" style={{ fontFamily: activeFontFamily }}>{cat.items}</span>
+                  <div key={idx} className="small text-dark d-flex align-items-start" style={{ fontFamily: activeFontFamily, fontSize: `calc(0.875rem * ${scaleFactor})`, lineHeight: '1.15' }}>
+                    <span className="text-center fw-bold flex-shrink-0 ms-4 me-2" style={{ width: '1.5rem', fontSize: '1.1rem', fontFamily: activeFontFamily, lineHeight: '1' }}>•</span>
+                    <div className="flex-grow-1" style={{ fontFamily: activeFontFamily, lineHeight: '1.15' }}>
+                      {cat.title && <span className="fw-bold" style={{ fontFamily: activeFontFamily }}>{cat.title}: </span>}
+                      <span className="fw-normal" style={{ fontFamily: activeFontFamily }}>{cat.items}</span>
+                    </div>
                   </div>
                 ) : null
               ))}
@@ -117,7 +120,7 @@ export default function ResumePreview({ resumeData }) {
                       {itemList.map((item, i) => (
                         <div key={i} className="col ps-0" style={{ fontFamily: activeFontFamily }}>
                           <div className="d-flex align-items-center" style={{ fontFamily: activeFontFamily }}>
-                            <span className="me-2 fw-bold" style={{ fontSize: '1.1rem', fontFamily: activeFontFamily, lineHeight: '1' }}>•</span>
+                            <span className="ms-3 me-3 fw-bold" style={{ fontSize: '1.1rem', fontFamily: activeFontFamily, lineHeight: '1' }}>•</span>
                             <span style={{ fontFamily: activeFontFamily }}>{item}</span>
                           </div>
                         </div>

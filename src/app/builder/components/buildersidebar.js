@@ -72,7 +72,7 @@ export default function BuilderSidebar({
               onClick={() => handleSelectSection(sec.id)}
               className={`nav-link text-start d-flex align-items-center gap-3 px-3 py-2.5 rounded-3 fw-medium transition-all ${
                 isActive 
-                  ? 'bg-primary text-white shadow-sm' 
+                  ? 'bg-secondary-subtle text-dark' 
                   : 'text-secondary hover-bg-light'
               }`}
               title={isCollapsed ? sec.label : ''}

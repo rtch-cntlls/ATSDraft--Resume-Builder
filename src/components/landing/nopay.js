@@ -1,12 +1,12 @@
 export default function NoPaywallBanner() {
   return (
-    <section className="py-4 bg-primary-subtle text-dark">
+    <section id="no-paywall" className="py-4 p-2 bg-primary-subtle text-dark">
       <div className="container">
-        <div className="row text-center text-md-start">
+        <div className="row text-center text-md-start align-items-center">
           <div className="col-md-8">
-            <h5 className="fw-bold mb-1">100% Free to Build and Download</h5>
+            <h2 className="h5 fw-bold mb-1">100% Free Resume Builder &amp; PDF Download</h2>
             <p className="mb-0 text-dark small">
-              No surprise paywalls at checkout. Build your complete resume and export high-quality PDFs without spending a cent.
+              No paywalls before exporting. Draft your complete resume in ATSDraft and download clean PDFs free of charge.
             </p>
           </div>
         </div>

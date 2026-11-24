@@ -14,30 +14,34 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white border-top border-light-subtle pt-5 mt-auto">
+    <footer className="bg-white border-top border-light-subtle pt-5 p-2 mt-auto">
       <div className="container">
         <div className="row g-4 justify-content-between mb-5">
           <div className="col-lg-4 col-md-6">
-            <Link href="#hero" onClick={(e) => handleScroll(e, 'hero')} className="d-flex align-items-center gap-2 text-dark text-decoration-none mb-3">
-              <Image 
-                src={Logo} 
-                alt="LikhaPage Logo" 
-                width={38} 
-                height={32} 
-                className="d-inline-block align-text-top" 
+            <Link
+              href="#hero"
+              onClick={(e) => handleScroll(e, 'hero')}
+              className="d-flex align-items-center gap-2 text-dark text-decoration-none mb-3"
+            >
+              <Image
+                src={Logo}
+                alt="ATSDraft Resume Builder Logo"
+                width={38}
+                height={32}
+                className="d-inline-block align-text-top"
               />
               <div className="d-flex flex-column lh-1">
                 <span className="tracking-tight fs-5 brand">
-                  Likha<span className="text-primary brand">Page</span>
+                  ATS<span className="text-primary brand">Draft</span>
                 </span>
                 <span className="text-muted fw-normal" style={{ fontSize: '0.65rem' }}>
-                   Resume Builder
+                  Resume Builder
                 </span>
               </div>
             </Link>
 
             <p className="text-secondary small mb-4" style={{ maxWidth: '320px', lineHeight: '1.6' }}>
-              Create ATS-friendly, professional resumes in minutes with our free, easy-to-use builder. No hidden paywalls or login required.
+              Create ATS-friendly, recruiter-ready resumes in minutes with ATSDraft. Free to use with instant PDF export and zero paywalls.
             </p>
           </div>
 
@@ -45,22 +49,38 @@ export default function Footer() {
             <h6 className="fw-bold text-dark mb-3">Quick Links</h6>
             <ul className="list-unstyled d-flex flex-column gap-2 small">
               <li>
-                <a href="#hero" onClick={(e) => handleScroll(e, 'hero')} className="text-secondary text-decoration-none hover-primary">
+                <a
+                  href="#hero"
+                  onClick={(e) => handleScroll(e, 'hero')}
+                  className="text-secondary text-decoration-none hover-primary"
+                >
                   Home
                 </a>
               </li>
               <li>
-                <a href="#ats-info" onClick={(e) => handleScroll(e, 'ats-info')} className="text-secondary text-decoration-none hover-primary">
+                <a
+                  href="#ats-info"
+                  onClick={(e) => handleScroll(e, 'ats-info')}
+                  className="text-secondary text-decoration-none hover-primary"
+                >
                   Why ATS?
                 </a>
               </li>
               <li>
-                <a href="#tips" onClick={(e) => handleScroll(e, 'how-it-works')} className="text-secondary text-decoration-none hover-primary">
-                  Formula & Tips
+                <a
+                  href="#tips"
+                  onClick={(e) => handleScroll(e, 'tips')}
+                  className="text-secondary text-decoration-none hover-primary"
+                >
+                  Formula &amp; Tips
                 </a>
               </li>
               <li>
-                <a href="#features" onClick={(e) => handleScroll(e, 'features')} className="text-secondary text-decoration-none hover-primary">
+                <a
+                  href="#features"
+                  onClick={(e) => handleScroll(e, 'features')}
+                  className="text-secondary text-decoration-none hover-primary"
+                >
                   Features
                 </a>
               </li>
@@ -85,14 +105,14 @@ export default function Footer() {
 
           <div className="col-lg-3 col-md-12">
             <div className="p-3 bg-light rounded-3 border border-light-subtle">
-              <h6 className="fw-bold text-dark mb-1">Ready to land your dream job?</h6>
-              <p className="text-secondary small mb-3">Build an optimized ATS resume in under 5 minutes.</p>
-              <Link 
-                href="/builder" 
+              <h6 className="fw-bold text-dark mb-1">Ready to land your next role?</h6>
+              <p className="text-secondary small mb-3">Build an ATS-optimized resume in under 5 minutes.</p>
+              <Link
+                href="/builder"
                 className="btn btn-primary btn-sm rounded-pill w-100 fw-semibold d-inline-flex align-items-center justify-content-center gap-2 shadow-sm"
               >
-                Start Building Now
-                <i className="bi bi-arrow-right"></i>
+                <span>Start Building Now</span>
+                <i className="bi bi-arrow-right" aria-hidden="true" />
               </Link>
             </div>
           </div>

@@ -15,22 +15,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://likhapage.vercel.app/";
-const siteName = "LikhaPage";
+const siteUrl = "https://atsdraft.vercel.app";
+const siteName = "ATSDraft";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "LikhaPage | Free ATS-Friendly Resume Builder",
-    template: "%s | LikhaPage",
+    default: "ATSDraft | Free ATS-Friendly Resume & CV Builder",
+    template: "%s | ATSDraft",
   },
 
   description:
-    "Create a professional, ATS-friendly resume for free with LikhaPage. Build, customize, preview, and download your resume as a PDF to take the next step in your career.",
+    "Build, customize, and download a free ATS-friendly resume or CV in minutes with ATSDraft. Clean recruiter-approved templates with instant PDF export and zero paywalls.",
 
   applicationName: siteName,
-
   category: "Career & Productivity",
 
   verification: {
@@ -44,27 +43,24 @@ export const metadata = {
   },
 
   keywords: [
-    "LikhaPage",
-    "Resume Builder",
+    "ATSDraft",
+    "ATS Resume Builder",
+    "Free ATS Resume Builder",
+    "ATS-Friendly Resume Builder",
+    "ATS-Friendly CV Maker",
     "Free Resume Builder",
     "Online Resume Builder",
-    "ATS-Friendly Resume Builder",
-    "ATS-Friendly Resume",
-    "ATS Resume Template",
-    "Free ATS Resume Builder",
-    "CV Builder",
-    "Free CV Maker",
+    "Free CV Builder",
     "Online CV Maker",
-    "Professional Resume Maker",
-    "Resume Creator",
-    "Resume Templates",
-    "Professional CV Templates",
+    "ATS Resume Template",
     "PDF Resume Builder",
+    "No Paywall Resume Builder",
+    "Professional Resume Maker",
+    "Simple Resume Creator",
     "Job Application Resume",
-    "Career Documents",
   ],
 
-  authors: [{ name: "Dev 404" }],
+  authors: [{ name: "Dev 404", url: siteUrl }],
   creator: siteName,
   publisher: siteName,
 
@@ -85,24 +81,24 @@ export const metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName,
-    title: "LikhaPage | Create Your Professional Resume",
+    title: "ATSDraft | Free ATS-Friendly Resume & CV Builder",
     description:
-      "Build a professional, ATS-friendly resume with LikhaPage. Customize your layout, preview your document, and download your resume as a PDF for free.",
+      "Create a clean, ATS-optimized resume or CV for free with ATSDraft. Customize your sections, preview in real time, and export as a PDF.",
     images: [
       {
         url: "/logo/secondary.png",
         width: 512,
         height: 512,
-        alt: "LikhaPage - Free Online Resume Builder",
+        alt: "ATSDraft - Free ATS-Friendly Resume & CV Builder",
       },
     ],
   },
 
   twitter: {
-    card: "summary",
-    title: "LikhaPage | Free ATS-Friendly Resume Builder",
+    card: "summary_large_image",
+    title: "ATSDraft | Free ATS-Friendly Resume & CV Builder",
     description:
-      "Create, customize, and download professional ATS-friendly resumes for free with LikhaPage.",
+      "Build, customize, and download free ATS-friendly resumes and CVs as PDF with ATSDraft.",
     images: ["/logo/secondary.png"],
   },
 
@@ -111,10 +107,35 @@ export const metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: siteName,
+  url: siteUrl,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "All",
+  browserRequirements: "Requires JavaScript. Requires HTML5.",
+  description:
+    "Free online ATS-friendly resume and CV builder with real-time preview and instant PDF download.",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  creator: {
+    "@type": "Person",
+    name: "rtch cntlls",
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
         <Analytics />
       </body>

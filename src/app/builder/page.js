@@ -3,7 +3,6 @@
 import { useState, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import Logo from '../../../public/logo/primary.png';
 import BuilderSidebar from './components/buildersidebar';
 import BuilderFormArea from './components/builderformarea';
@@ -31,79 +30,100 @@ function BuilderContent() {
                     education: true,
                     certificates: true,
                     ...(baseTemplate.settings?.visibleSections || {}),
-                    projects: templateParam === 'photo' ? true : false
-                }
-            }
+                    projects: templateParam === 'photo' ? true : false,
+                },
+            },
         };
     };
 
     const [activeSection, setActiveSection] = useState('header');
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
-
     const [isMobilePreviewOpen, setIsMobilePreviewOpen] = useState(false);
+    const [isExporting, setIsExporting] = useState(false);
 
     const [resumeData, setResumeData] = useState(() => getInitialResumeData());
-    const resumePreviewRef = useRef(null);
+    const pdfExportRef = useRef(null);
+
+    const handleLogoReload = (e) => {
+        e.preventDefault();
+        window.location.assign('/');
+    };
 
     const handleDownloadPdf = async () => {
-        if (typeof window !== 'undefined') {
+        if (typeof window === 'undefined' || !pdfExportRef.current || isExporting) return;
+
+        setIsExporting(true);
+        try {
             const html2pdf = (await import('html2pdf.js')).default;
-            const element = resumePreviewRef.current;
+            const slugName = resumeData?.header?.fullName?.trim().toLowerCase().replace(/\s+/g, '-') || 'atsdraft';
 
             const options = {
                 margin: 0,
-                filename: `${resumeData.header.fullName.toLowerCase().replace(/\s+/g, '-')}-resume.pdf`,
+                filename: `${slugName}-resume.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: {
                     scale: 2,
                     useCORS: true,
                     letterRendering: true,
-                    windowWidth: 794
+                    windowWidth: 794,
                 },
                 jsPDF: {
                     unit: 'mm',
                     format: 'a4',
-                    orientation: 'portrait'
-                }
+                    orientation: 'portrait',
+                },
             };
 
-            html2pdf().from(element).set(options).save();
+            await html2pdf().from(pdfExportRef.current).set(options).save();
+        } finally {
+            setIsExporting(false);
         }
     };
 
     return (
         <div className="min-vh-100 d-flex flex-column bg-light overflow-hidden">
-            <header className="bg-white border-bottom px-4 py-3 d-flex justify-content-between align-items-center shadow-sm flex-shrink-0" style={{ height: '57px' }}>
-                <Link href="/" className="d-flex align-items-center gap-2 text-dark text-decoration-none py-1">
+            <header
+                className="bg-white border-bottom px-4 py-3 d-flex justify-content-between align-items-center shadow-sm flex-shrink-0"
+                style={{ height: '57px' }}
+            >
+                <a
+                    href="/"
+                    onClick={handleLogoReload}
+                    className="d-flex align-items-center gap-2 text-dark text-decoration-none py-1"
+                >
                     <Image
                         src={Logo}
-                        alt="LikhaPage Logo"
+                        alt="ATSDraft Resume Builder Logo"
                         width={40}
                         height={34}
                         className="d-inline-block align-text-top"
                     />
                     <div className="d-none d-sm-flex flex-column lh-1">
                         <span className="tracking-tight fs-5 text-dark logo-workspace">
-                            Likha<span className="text-primary logo-workspace">Page</span> <span className="workspace">Workspace</span>
+                            ATS<span className="text-primary logo-workspace">Draft</span>{' '}
+                            <span className="workspace">Workspace</span>
                         </span>
                     </div>
-                </Link>
+                </a>
 
                 <div className="d-flex align-items-center gap-3">
                     <button
+                        type="button"
+                        disabled={isExporting}
                         className="btn btn-primary btn-download btn-sm rounded-3 px-4 fw-semibold shadow-sm d-inline-flex align-items-center gap-1"
                         onClick={handleDownloadPdf}
                     >
-                        <i className="bi bi-download"></i> Download PDF
+                        <i className={`bi ${isExporting ? 'bi-hourglass-split' : 'bi-download'}`} aria-hidden="true" />
+                        <span>{isExporting ? 'Exporting...' : 'Download PDF'}</span>
                     </button>
                 </div>
             </header>
 
-            <MobileResumePreview 
-                resumeData={resumeData} 
-                isOpen={isMobilePreviewOpen} 
-                onClose={() => setIsMobilePreviewOpen(false)} 
+            <MobileResumePreview
+                resumeData={resumeData}
+                isOpen={isMobilePreviewOpen}
+                onClose={() => setIsMobilePreviewOpen(false)}
             />
 
             <div className="container-fluid flex-grow-1 overflow-hidden p-0 position-relative">
@@ -125,28 +145,36 @@ function BuilderContent() {
                             setIsMobileOpen={setIsMobileOpen}
                         />
                         <div className="flex-grow-1 d-flex flex-column overflow-hidden bg-white w-100 h-100">
-
                             <div className="d-lg-none px-3 py-2 border-bottom bg-light d-flex align-items-center justify-content-between flex-shrink-0">
                                 <div className="d-flex align-items-center gap-2">
                                     <button
+                                        type="button"
                                         onClick={() => setIsMobileOpen(!isMobileOpen)}
                                         className="btn btn-light btn-sm text-secondary border shadow-none p-1 rounded-2 d-flex align-items-center justify-content-center"
-                                        title={isMobileOpen ? "Close Sidebar" : "Open Sidebar"}
+                                        title={isMobileOpen ? 'Close Sidebar' : 'Open Sidebar'}
                                         style={{ width: '32px', height: '32px', flexShrink: 0 }}
                                     >
-                                        <i className={`bi ${isMobileOpen ? 'bi-layout-sidebar-inset' : 'bi-layout-sidebar'}`}></i>
+                                        <i
+                                            className={`bi ${isMobileOpen ? 'bi-layout-sidebar-inset' : 'bi-layout-sidebar'}`}
+                                            aria-hidden="true"
+                                        />
                                     </button>
-                                    <span className="fw-bold text-secondary text-uppercase" style={{ fontSize: '0.75rem', letterSpacing: '0.5px' }}>
-                                        Form Editor
+                                    <span
+                                        className="fw-bold text-secondary text-uppercase"
+                                        style={{ fontSize: '0.75rem', letterSpacing: '0.5px' }}
+                                    >
+                                        Resume Editor
                                     </span>
                                 </div>
 
                                 <button
+                                    type="button"
                                     onClick={() => setIsMobilePreviewOpen(true)}
                                     className="btn btn-outline-secondary rounded-3 btn-sm text-decoration-none fw-semibold d-inline-flex align-items-center gap-1"
                                     style={{ fontSize: '0.8rem' }}
                                 >
-                                    <i className="bi bi-eye"></i> Preview Resume
+                                    <i className="bi bi-eye" aria-hidden="true" />
+                                    <span>Preview Resume</span>
                                 </button>
                             </div>
 
@@ -161,15 +189,19 @@ function BuilderContent() {
                     </div>
 
                     <div className="col-lg-6 bg-secondary-subtle p-3 p-md-4 d-none d-lg-flex justify-content-center align-items-start overflow-auto builder-preview-col">
-                        <div className="w-100 d-flex justify-content-center" ref={resumePreviewRef}>
+                        <div className="w-100 d-flex justify-content-center">
                             <ResumePreview resumeData={resumeData} />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="d-none">
-                <div ref={resumePreviewRef}>
+            <div
+                aria-hidden="true"
+                className="position-fixed top-0 start-0"
+                style={{ left: '-9999px', width: '794px', pointerEvents: 'none', zIndex: -1 }}
+            >
+                <div ref={pdfExportRef}>
                     <ResumePreview resumeData={resumeData} />
                 </div>
             </div>

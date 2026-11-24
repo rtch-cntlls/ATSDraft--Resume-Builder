@@ -2,17 +2,18 @@ import { resumeFormulaSteps, formulaExample, formulaHeaderData } from '../../dat
 
 export default function Tips() {
   const exampleParts = [
-  { key: 'verb', label: 'Action verb', text: formulaExample.actionVerb },
-  { key: 'resp', label: 'Responsibility', text: formulaExample.responsibility },
-  { key: 'result', label: 'Result', text: formulaExample.result },
-];
+    { key: 'verb', label: 'Action verb', text: formulaExample.actionVerb },
+    { key: 'resp', label: 'Responsibility', text: formulaExample.responsibility },
+    { key: 'result', label: 'Result', text: formulaExample.result },
+  ];
+
   return (
-    <section id="tips" className="py-5 bg-white">
+    <section id="tips" className="py-5 p-2 bg-white">
       <div className="container py-md-4 py-2">
         <div className="text-center max-w-2xl mx-auto mb-5">
-          <h1 className="fw-bold text-dark">
+          <h2 className="fw-bold text-dark">
             {formulaHeaderData.title}
-          </h1>
+          </h2>
           <p className="text-secondary">
             {formulaHeaderData.subtitle}
           </p>
@@ -27,12 +28,13 @@ export default function Tips() {
                     {item.badgeText}
                   </span>
                 </div>
-                <h4 className="fw-bold text-dark mb-2">{item.title}</h4>
+                <h3 className="h4 fw-bold text-dark mb-2">{item.title}</h3>
                 <p className="text-secondary small mb-0">{item.description}</p>
               </div>
             </div>
           ))}
         </div>
+
         <div className="mx-auto">
           <div className="formula-demo__paper">
             <span className="formula-demo__bullet" aria-hidden="true">•</span>
@@ -47,11 +49,9 @@ export default function Tips() {
           </div>
 
           <dl className="formula-demo__breakdown mb-0">
-            {exampleParts.map((part, i) => (
+            {exampleParts.map((part) => (
               <div className={`formula-row formula-row--${part.key}`} key={part.key}>
-                <dt>
-                  {part.label}
-                </dt>
+                <dt>{part.label}</dt>
                 <dd>{part.text}</dd>
               </div>
             ))}

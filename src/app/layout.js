@@ -33,7 +33,7 @@ export const metadata = {
   category: "Career & Productivity",
 
   verification: {
-    google: "google4d297be11b314d97",
+    google: "oI5jWD3yA8mlom8iOlC3L2qc7bvub0oHiR6sQ_CI5vA",
   },
 
   icons: {

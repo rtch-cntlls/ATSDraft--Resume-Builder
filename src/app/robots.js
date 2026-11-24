@@ -6,10 +6,8 @@ export default function robots() {
       {
         userAgent: "*",
         allow: ["/", "/builder"],
-        disallow: ["/api/", "/dashboard/", "/account/"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
   };
 }

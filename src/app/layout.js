@@ -17,17 +17,18 @@ const geistMono = Geist_Mono({
 
 const siteUrl = "https://atsdraft.vercel.app";
 const siteName = "ATSDraft";
+const creatorName = "rtch cntlls";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "ATSDraft | Free ATS-Friendly Resume & CV Builder",
+    default: "ATSDraft | Free ATS-Friendly Resume Builder",
     template: "%s | ATSDraft",
   },
 
   description:
-    "Build, customize, and download a free ATS-friendly resume or CV in minutes with ATSDraft. Clean recruiter-approved templates with instant PDF export and zero paywalls.",
+    "Build, customize, and download a free ATS-friendly resume in minutes with ATSDraft. Clean recruiter-approved resume layouts with instant PDF export and zero paywalls.",
 
   applicationName: siteName,
   category: "Career & Productivity",
@@ -47,11 +48,8 @@ export const metadata = {
     "ATS Resume Builder",
     "Free ATS Resume Builder",
     "ATS-Friendly Resume Builder",
-    "ATS-Friendly CV Maker",
     "Free Resume Builder",
     "Online Resume Builder",
-    "Free CV Builder",
-    "Online CV Maker",
     "ATS Resume Template",
     "PDF Resume Builder",
     "No Paywall Resume Builder",
@@ -60,8 +58,8 @@ export const metadata = {
     "Job Application Resume",
   ],
 
-  authors: [{ name: "Dev 404", url: siteUrl }],
-  creator: siteName,
+  authors: [{ name: creatorName, url: siteUrl }],
+  creator: creatorName,
   publisher: siteName,
 
   robots: {
@@ -81,24 +79,24 @@ export const metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName,
-    title: "ATSDraft | Free ATS-Friendly Resume & CV Builder",
+    title: "ATSDraft | Free ATS-Friendly Resume Builder",
     description:
-      "Create a clean, ATS-optimized resume or CV for free with ATSDraft. Customize your sections, preview in real time, and export as a PDF.",
+      "Create a clean, ATS-optimized resume for free with ATSDraft. Customize your sections, preview in real time, and export as a PDF.",
     images: [
       {
         url: "/logo/secondary.png",
         width: 512,
         height: 512,
-        alt: "ATSDraft - Free ATS-Friendly Resume & CV Builder",
+        alt: "ATSDraft - Free ATS-Friendly Resume Builder",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "ATSDraft | Free ATS-Friendly Resume & CV Builder",
+    title: "ATSDraft | Free ATS-Friendly Resume Builder",
     description:
-      "Build, customize, and download free ATS-friendly resumes and CVs as PDF with ATSDraft.",
+      "Build, customize, and download free ATS-friendly resumes as PDFs with ATSDraft.",
     images: ["/logo/secondary.png"],
   },
 
@@ -116,7 +114,7 @@ const jsonLd = {
   operatingSystem: "All",
   browserRequirements: "Requires JavaScript. Requires HTML5.",
   description:
-    "Free online ATS-friendly resume and CV builder with real-time preview and instant PDF download.",
+    "Free online ATS-friendly resume builder with real-time preview and instant PDF download.",
   offers: {
     "@type": "Offer",
     price: "0",
@@ -124,7 +122,7 @@ const jsonLd = {
   },
   creator: {
     "@type": "Person",
-    name: "rtch cntlls",
+    name: creatorName,
   },
 };
 

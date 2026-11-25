@@ -28,7 +28,6 @@
 
 - **Framework:** [Next.js 16](https://nextjs.org/) (`^16.4.6`, App Router, Client Components) & [React 19](https://react.dev/) (`19.3.0`)
 - **Frontend UI Library:** [Bootstrap 5](https://getbootstrap.com/) (`^5.3.8`) & [Bootstrap Icons](https://icons.getbootstrap.com/) (`^1.13.2`)
-- **Styling & Fonts:** CSS3, Modern CSS Grid/Flexbox, [Geist & Plus Jakarta Sans](https://fonts.google.com/)
+- **Styling & Fonts:** CSS3, [Geist & Plus Jakarta Sans](https://fonts.google.com/)
 - **PDF Compilation:** [html2pdf.js](https://github.com/eKoopmans/html2pdf.js) (`^0.14.0`)
 - **Analytics:** [Vercel Analytics](https://vercel.com/analytics) (`^2.0.1`)
-- **Icons & Media:** Next.js Image Optimization
